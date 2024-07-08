@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap");
 
 body {
-  font-family: "Montserrat", sans-serif !important; 
+  font-family: "Montserrat", sans-serif !important;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -9,13 +9,11 @@ body {
   background-position: center;
   background-repeat: repeat;
   background-size: 7%;
-  background-color: #EBF4F6;
+  background-color: #ebf4f6;
   overflow-x: hidden;
   transition: all 200ms linear;
   height: 100%;
   width: 100%;
-
-  
 }
 /* #Navigation
 ================================================== */
@@ -69,7 +67,6 @@ header .navigation-wrap {
   position: relative;
   border-bottom: 1px solid #000;
   transition: all 300ms linear;
-  
 }
 .navbar-light .navbar-toggler-icon:after,
 .navbar-light .navbar-toggler-icon:before {
@@ -144,7 +141,6 @@ header .navigation-wrap {
   position: relative;
   width: 100%;
   display: block;
-  
 }
 .full-height {
   height: 100vh;
@@ -166,13 +162,11 @@ body.hero-anime p {
   opacity: 0;
   transform: translateY(40px);
   transition-delay: 1700ms;
-  
 }
 
-.navbar-custom{
+.navbar-custom {
   background-color: #8167a9;
 }
-
 
 /* #Media
 ================================================== */
@@ -252,7 +246,7 @@ body.hero-anime p {
 #intro p {
   font-size: 20px;
 }
-#intro .titles{
+#intro .titles {
   margin-top: 50px;
 }
 #intro .intro-btn .btn {
@@ -338,7 +332,7 @@ body.hero-anime p {
 .flatpickr-day.selected:hover,
 .tns-nav button.tns-nav-active,
 .form-check-input.form-check-input:checked {
-  background-color:  rgb(0, 24, 97) !important;
+  background-color: rgb(0, 24, 97) !important;
 }
 
 #job-list .badge {
@@ -387,7 +381,7 @@ body.hero-anime p {
 .form-check-input.form-check-input:checked,
 .container-filter li.active,
 .container-filter li:hover {
-  border-color:  rgb(0, 24, 97) !important;
+  border-color: rgb(0, 24, 97) !important;
 }
 #job-list .bg-primary,
 .btn-primary,
@@ -415,7 +409,7 @@ body.hero-anime p {
 .flatpickr-day.selected:hover,
 .tns-nav button.tns-nav-active,
 .form-check-input.form-check-input:checked {
-  background-color: rgb(0, 24, 97) !important;  /*Remote*/
+  background-color: rgb(0, 24, 97) !important; /*Remote*/
 }
 #job-list .btn {
   padding: 8px 20px;
@@ -428,8 +422,8 @@ body.hero-anime p {
   border-radius: 5px;
 }
 #job-list .btn-primary {
-  background-color:  rgba(0, 24, 97, 0.7) !important;
-  border: 1px solid rgb(0, 24, 97)!important;
+  background-color: rgba(0, 24, 97, 0.7) !important;
+  border: 1px solid rgb(0, 24, 97) !important;
   color: #fff !important;
   box-shadow: 0 3px 7px rgb(109 199 122 / 50%);
 }
@@ -438,24 +432,165 @@ body.hero-anime p {
   text-decoration: none;
 }
 
-#style-5::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+#style-5::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-#style-5::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
+#style-5::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
 }
 
-#style-5::-webkit-scrollbar-thumb
-{
-	background-color: #0ae;
-	
-	background-image: -webkit-gradient(linear, 0 0, 0 100%,
-	                   color-stop(.5, rgba(255, 255, 255, .2)),
-					   color-stop(.5, transparent), to(transparent));
+#style-5::-webkit-scrollbar-thumb {
+  background-color: #0ae;
+
+  background-image: -webkit-gradient(
+    linear,
+    0 0,
+    0 100%,
+    color-stop(0.5, rgba(255, 255, 255, 0.2)),
+    color-stop(0.5, transparent),
+    to(transparent)
+  );
 }
 
+/* Announcements */
+#news-slider {
+  margin-top: 80px;
+}
+.post-slide {
+  background: #fff;
+  margin: 20px 15px 20px;
+  border-radius: 15px;
+  padding-top: 1px;
+  box-shadow: 0px 14px 22px -9px #bbcbd8;
+
+}
+.post-slide .post-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: -12px 15px 8px 15px;
+  margin-left: -10px;
+}
+.post-slide .post-img img {
+  width: 100%;
+  height: auto;
+  transform: scale(1, 1);
+  transition: transform 0.2s linear;
+}
+.post-slide:hover .post-img img {
+  transform: scale(1.1, 1.1);
+}
+.post-slide .over-layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: linear-gradient(
+    -45deg,
+    rgba(6, 190, 244, 0.75) 0%,
+    rgba(45, 112, 253, 0.6) 100%
+  );
+  transition: all 0.5s linear;
+}
+.post-slide:hover .over-layer {
+  opacity: 1;
+  text-decoration: none;
+}
+.post-slide .over-layer i {
+  position: relative;
+  top: 45%;
+  text-align: center;
+  display: block;
+  color: #fff;
+  font-size: 25px;
+}
+.post-slide .post-content {
+  background: #fff;
+  padding: 2px 20px 40px;
+  border-radius: 15px;
+}
+.post-slide .post-title a {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+.post-slide .post-title a:hover {
+  text-decoration: none;
+  color: #3498db;
+}
+.post-slide .post-description {
+  line-height: 24px;
+  color: #808080;
+  margin-bottom: 25px;
+}
+.post-slide .post-date {
+  color: #a9a9a9;
+  font-size: 14px;
+}
+.post-slide .post-date i {
+  font-size: 20px;
+  margin-right: 8px;
+  color: #cfdace;
+}
+.post-slide .read-more {
+  padding: 7px 20px;
+  float: right;
+  font-size: 12px;
+  background: #2196f3;
+  color: #ffffff;
+  box-shadow: 0px 10px 20px -10px #1376c5;
+  border-radius: 25px;
+  text-transform: uppercase;
+}
+.post-slide .read-more:hover {
+  background: #3498db;
+  text-decoration: none;
+  color: #fff;
+}
+.owl-controls .owl-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+.owl-controls .owl-buttons .owl-prev {
+  background: #fff;
+  position: absolute;
+  top: -13%;
+  left: 15px;
+  padding: 0 18px 0 15px;
+  border-radius: 50px;
+  box-shadow: 3px 14px 25px -10px #92b4d0;
+  transition: background 0.5s ease 0s;
+}
+.owl-controls .owl-buttons .owl-next {
+  background: #fff;
+  position: absolute;
+  top: -13%;
+  right: 15px;
+  padding: 0 15px 0 18px;
+  border-radius: 50px;
+  box-shadow: -3px 14px 25px -10px #92b4d0;
+  transition: background 0.5s ease 0s;
+}
+.owl-controls .owl-buttons .owl-prev:after,
+.owl-controls .owl-buttons .owl-next:after {
+  content: "\f104";
+  font-family: FontAwesome;
+  color: #333;
+  font-size: 30px;
+}
+.owl-controls .owl-buttons .owl-next:after {
+  content: "\f105";
+}
+@media only screen and (max-width: 1280px) {
+  .post-slide .post-content {
+    padding: 0px 15px 25px 15px;
+  }
+}
