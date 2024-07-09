@@ -114,106 +114,10 @@
         </div><!--end row-->
     
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-            <div class="card border-0 bg-light rounded shadow">
-                <div class="card-body p-4">
-                    <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                    <h6>Project Technical Aide IV</h6>
-                    <div class="mt-3">
-                        <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                        <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-          <div class="card border-0 bg-light rounded shadow">
-              <div class="card-body p-4">
-                  <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                  <h6>Project Technical Aide IV</h6>
-                  <div class="mt-3">
-                      <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                      <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                  </div>
-                  
-                  <div class="mt-3">
-                      <a href="#" class="btn btn-primary">View Details</a>
-                  </div>
-              </div>
-          </div>
-      </div><!--end col-->
-      <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-        <div class="card border-0 bg-light rounded shadow">
-            <div class="card-body p-4">
-                <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                <h6>Project Technical Aide IV</h6>
-                <div class="mt-3">
-                    <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                    <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                </div>
-                
-                <div class="mt-3">
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-    </div><!--end col-->
-    
-            <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                <div class="card border-0 bg-light rounded shadow">
-                    <div class="card-body p-4">
-                        <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                        <h6>Project Technical Aide IV</h6>
-                        <div class="mt-3">
-                            <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                            <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end col-->
-
-            <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-              <div class="card border-0 bg-light rounded shadow">
-                  <div class="card-body p-4">
-                      <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                      <h6>Project Technical Aide IV</h6>
-                      <div class="mt-3">
-                          <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                          <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                      </div>
-                      
-                      <div class="mt-3">
-                          <a href="#" class="btn btn-primary">View Details</a>
-                      </div>
-                  </div>
-              </div>
-          </div><!--end col-->
-
-          <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-            <div class="card border-0 bg-light rounded shadow">
-                <div class="card-body p-4">
-                    <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Full time</span>
-                    <h6>Project Technical Aide IV</h6>
-                    <div class="mt-3">
-                        <span class="text-muted d-block"><i class="fa fa-home" aria-hidden="true"></i> <a href="#" target="_blank" class="text-muted">Contract of Service</a></span>
-                        <span class="text-muted d-block"><i class="fa fa-map-marker" aria-hidden="true"></i> Php 22,344.08</span>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-    
+          <?php
+          include_once 'php_connections/fetch_jobs.php'; // Adjust the path as necessary
+          ?>
+             
             <div class="col-12 mt-4 pt-2 d-block d-md-none text-center">
                 <a href="#" class="btn btn-primary">View more Jobs <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right fea icon-sm"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
             </div><!--end col-->
@@ -221,6 +125,8 @@
     </div>
 
     </section>
+
+    
 
     <div class="col-md-6">
       <!-- Empty column to create space -->
@@ -324,6 +230,7 @@
       </div>
     </div>
 </footer>
+  
   </body>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
