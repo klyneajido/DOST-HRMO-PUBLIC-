@@ -1,5 +1,5 @@
 <?php
-include_once 'php_connections/db_connection.php'; // Adjust the path as necessary
+include_once 'db_connection.php'; // Adjust the path as necessary
 
 // SQL query to fetch jobs data including department name
 $sql = "SELECT job.position, department.name, job.monthlysalary 
