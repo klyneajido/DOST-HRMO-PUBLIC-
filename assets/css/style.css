@@ -495,8 +495,9 @@ body.hero-anime p {
   transform: scale(0.9);
   opacity: 0.5;
   transition: all 0.3s;
+  height: auto;
 }
-.slider-card img {
+.slider-card a,img {
   border-radius: 5px 5px 0px 0px;
   object-fit: cover;
   width: 100%; /* Ensure images fill their container */
