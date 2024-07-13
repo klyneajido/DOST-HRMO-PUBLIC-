@@ -33,64 +33,42 @@
                     <h1 class="mb-4">Find Your Dream Job Here</h1>
                     <div class="row">
                         <div class="col-lg-10 mx-auto">
-                            <div class="search-bar d-flex">
-                                <input type="text" class="form-control" placeholder="Job title or keyword">
-                                <button class="btn btn-primary ml-2 ">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <span class="badge badge-pill badge-light">Sales</span>
-                        <span class="badge badge-pill badge-light">Fulltime</span>
-                        <span class="badge badge-pill badge-light">Remote</span>
-                        <!-- Add more badges as needed -->
-                    </div>
-                </div>
+                        <div class="search-bar d-flex">
+    <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Job title or keyword">
+    <button class="btn btn-primary ml-2" onclick="applyFilters()">Search</button>
+</div>
+
+<div class="container-wide mt-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <h5>Filter</h5>
+            <input type="text" id="companySkillTag" name="companySkillTag" class="form-control mb-3" placeholder="Company, skill, tag...">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="permanent" id="permanent">
+                <label class="form-check-label" for="permanent">
+                    Permanent
+                </label>
             </div>
-            <div class="container-wide mt-5">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h5>Filter</h5>
-                        <input type="text" class="form-control mb-3" placeholder="Company, skill, tag...">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="fulltime">
-                            <label class="form-check-label" for="fulltime">
-                                Fulltime
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="seniorLevel">
-                            <label class="form-check-label" for="seniorLevel">
-                                Senior level
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="remote">
-                            <label class="form-check-label" for="remote">
-                                Remote
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="contract">
-                            <label class="form-check-label" for="contract">
-                                Contract
-                            </label>
-                        </div>
-                        <!-- Add more filters as needed -->
-                    </div>
-                    <div class="col-lg-9">
-                        <?php include("./php_connections/fetch_jobs_joblist_page.php"); ?>
-                        <!-- Add more job cards as needed -->
-                    </div>
-                </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="cos" id="cos">
+                <label class="form-check-label" for="cos">
+                    COS
+                </label>
             </div>
+        </div>
+        <div class="col-lg-9" id="job-list-container">
+            <!-- Job cards will be displayed here -->
+            <?php include("./php_connections/fetch_jobs_joblist_page.php"); ?>
+        </div>
+    </div>
+</div>
+
         </section>
     </div>
-
+    <script src="assets/js/script_joblist_page.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

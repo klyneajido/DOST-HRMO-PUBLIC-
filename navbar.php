@@ -15,10 +15,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto py-4 py-md-0">
                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                      <a class="nav-link" href="#job-list">Apply</a>
+                      <a class="nav-link" href="joblist_page.php">Apply</a>
                     </li>
                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                       <a class="nav-link" href="#announcements">Announcements</a>
