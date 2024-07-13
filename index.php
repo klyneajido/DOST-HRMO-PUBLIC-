@@ -57,7 +57,7 @@
 
           <div class="col-md-4 mt-4 mt-sm-0 d-none d-md-block">
             <div class="text-center text-md-end">
-              <a href="#" class="text-primary">View more Jobs <svg xmlns="http://www.w3.org/2000/svg" width="24"
+              <a href="joblist_page.php" class="text-primary">View more Jobs <svg xmlns="http://www.w3.org/2000/svg" width="24"
                   height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right fea icon-sm">
                   <line x1="5" y1="12" x2="19" y2="12"></line>

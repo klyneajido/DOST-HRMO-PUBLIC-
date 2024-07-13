@@ -1,3 +1,21 @@
+<?php
+include_once 'php_connections/db_connection.php'; // Adjust the path as necessary
+
+// Get the job ID from the URL
+$job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
+
+// SQL query to fetch job details based on job ID
+$sql = "SELECT job.position, department.name, job.monthlysalary, job.status, job.description
+        FROM job 
+        JOIN department ON job.department_id = department.department_id
+        WHERE job.job_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $job_id);
+$stmt->execute();
+$stmt->bind_result($position, $department_name, $monthlysalary, $status, $description);
+$stmt->fetch();
+$stmt->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,40 +44,38 @@
     <div class="col-md-6">
       <!-- Empty column to create space -->
     </div>
-    <section id="job_description" class="container-fluid d-flex">
-      <div class="main container-l row-lg-8 order-lg-1 order-2">
+    <section id="job_description" class="container-l row px-5">
+      <div class="main col-lg-8">
         <div class="container d-flex justify-content-between">
           <div class="title">
-            <h3>Computer Programmer III</h3>
+            <h3><?php echo htmlspecialchars($position); ?></h3>
           </div>
           <div class="buttons d-flex">
             <div class="apply-btn p-1">
-              <button type="button" class="btn btn-primary px-3">Apply</button>
+              <button type="button" class="btn btn-primary px-5">Apply</button>
             </div>
-            <div class="fav-btn p-1"><i class="far fa-bookmark"></i></div>
-            <div class="share-btn p-1"><i class="fa-solid fa-share-nodes"></i></div>
           </div>
         </div>
 
         <div class="department container d-flex mb-3 ">
-          <div class="title mr-3">ITSM DEPARTMENT</div>
+          <div class="title mr-3"><?php echo htmlspecialchars($department_name); ?></div>
           <div class="location d-flex justify-content-center text-center align-items-center">
             <i class="fa-solid fa-location-dot mr-2"></i>
             <p class="m-0 text-secondary">San Fernando City</p>
           </div>
         </div>
-        <div class="container">
+        <div class="container mt-4">
           <div class="title">
-            <h3>About this Role</h3>
+          <p class="h4">About this role</p>
           </div>
           <div class="description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p><?php echo htmlspecialchars($description); ?></p>
           </div>
         </div>
 
         <div class="container">
           <div class="title">
-            <h3>Requirements</h3>
+          <p class="h4">Requirements</p>
           </div>
           <div class="requirements">
             <ul>
@@ -74,7 +90,7 @@
 
         <div class="container">
           <div class="title">
-            <h3>responsibility</h3>
+            <p class="h4">Responsibility</p>
           </div>
           <div class="responsibility">
             <ul>
@@ -87,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="more col-lg-4 order-lg-2 order-1 mb-4 mb-lg-0">
+      <div class="more col-lg-4">
         <div class="container">
           <div class="title">
             <h4>Other Jobs</h4>
@@ -95,17 +111,15 @@
           <div class="container">
             <div class="card job-card mb-2">
               <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="d-flex align-items-center mb-3">
-                      <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                      <span class="badge rounded-pill bg-primary">PERMANENT</span>
-                    </div>
-                    <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="d-flex justify-content-between align-items-start w-100">
+                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
+                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
+                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
                   </div>
                 </div>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-                  <span class='text-muted d-block'>₱ 100000</span>
+                <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
+                  <span class="text-muted d-block">₱ 100000</span>
                   <p class="card-text mb-0"><small class="text-muted"></small></p>
                 </div>
               </div>
@@ -113,17 +127,15 @@
 
             <div class="card job-card mb-2">
               <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="d-flex align-items-center mb-3">
-                      <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                      <span class="badge rounded-pill bg-primary">PERMANENT</span>
-                    </div>
-                    <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="d-flex justify-content-between align-items-start w-100">
+                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
+                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
+                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
                   </div>
                 </div>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-                  <span class='text-muted d-block'>₱ 100000</span>
+                <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
+                  <span class="text-muted d-block">₱ 100000</span>
                   <p class="card-text mb-0"><small class="text-muted"></small></p>
                 </div>
               </div>
@@ -131,17 +143,15 @@
 
             <div class="card job-card mb-2">
               <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="d-flex align-items-center mb-3">
-                      <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                      <span class="badge rounded-pill bg-primary">PERMANENT</span>
-                    </div>
-                    <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="d-flex justify-content-between align-items-start w-100">
+                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
+                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
+                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
                   </div>
                 </div>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-                  <span class='text-muted d-block'>₱ 100000</span>
+                <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
+                  <span class="text-muted d-block">₱ 100000</span>
                   <p class="card-text mb-0"><small class="text-muted"></small></p>
                 </div>
               </div>
@@ -149,35 +159,15 @@
 
             <div class="card job-card mb-2">
               <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="d-flex align-items-center mb-3">
-                      <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                      <span class="badge rounded-pill bg-primary">PERMANENT</span>
-                    </div>
-                    <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="d-flex justify-content-between align-items-start w-100">
+                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
+                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
+                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
                   </div>
                 </div>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-                  <span class='text-muted d-block'>₱ 100000</span>
-                  <p class="card-text mb-0"><small class="text-muted"></small></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card job-card mb-2">
-              <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div class="d-flex align-items-center mb-3">
-                      <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                      <span class="badge rounded-pill bg-primary">PERMANENT</span>
-                    </div>
-                    <h6 class="card-subtitle text-muted">ITSM</h6>
-                  </div>
-                </div>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-                  <span class='text-muted d-block'>₱ 100000</span>
+                <h6 class="card-subtitle text-muted">ITSM</h6>
+                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
+                  <span class="text-muted d-block">₱ 100000</span>
                   <p class="card-text mb-0"><small class="text-muted"></small></p>
                 </div>
               </div>
