@@ -1,24 +1,32 @@
 <?php
 include_once 'php_connections/db_connection.php'; // Adjust the path as necessary
 
-// Get the job ID from the URL
+// Get the job ID from the URL and validate it
 $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
 
-// SQL query to fetch job details based on job ID
-$sql = "SELECT job.position, department.name, job.monthlysalary, job.status, job.description
-        FROM job 
-        JOIN department ON job.department_id = department.department_id
-        WHERE job.job_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $job_id);
-$stmt->execute();
-$stmt->bind_result($position, $department_name, $monthlysalary, $status, $description);
-$stmt->fetch();
-$stmt->close();
+if ($job_id > 0) {
+    // SQL query to fetch job details based on job ID
+    $sql = "SELECT job.position, department.name, job.monthlysalary, job.status, job.description
+            FROM job 
+            JOIN department ON job.department_id = department.department_id
+            WHERE job.job_id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("i", $job_id);
+        $stmt->execute();
+        $stmt->bind_result($position, $department_name, $monthlysalary, $status, $description);
+        $stmt->fetch();
+        $stmt->close();
+    } else {
+        // Handle query preparation error
+        die("Error preparing query: " . $conn->error);
+    }
+} else {
+    die("Invalid job ID");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
@@ -32,11 +40,9 @@ $stmt->close();
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
 
   <script src="https://kit.fontawesome.com/0dcd39d035.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body class="scrollbar" id="style-5">
-
   <div class="force-overflow">
     <!-- Navbar -->
     <?php include("navbar.php"); ?>
@@ -52,7 +58,9 @@ $stmt->close();
           </div>
           <div class="buttons d-flex">
             <div class="apply-btn p-1">
+              <a href="apply_page.php?job_id=<?php echo $job_id; ?>">
               <button type="button" class="btn btn-primary px-5">Apply</button>
+              </a>
             </div>
           </div>
         </div>
@@ -66,7 +74,7 @@ $stmt->close();
         </div>
         <div class="container mt-4">
           <div class="title">
-          <p class="h4">About this role</p>
+            <p class="h4">About this role</p>
           </div>
           <div class="description">
             <p><?php echo htmlspecialchars($description); ?></p>
@@ -75,7 +83,7 @@ $stmt->close();
 
         <div class="container">
           <div class="title">
-          <p class="h4">Requirements</p>
+            <p class="h4">Requirements</p>
           </div>
           <div class="requirements">
             <ul>
@@ -109,80 +117,15 @@ $stmt->close();
             <h4>Other Jobs</h4>
           </div>
           <div class="container">
-            <div class="card job-card mb-2">
-              <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start w-100">
-                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
-                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
-                  </div>
-                </div>
-                <h6 class="card-subtitle text-muted">ITSM</h6>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                  <span class="text-muted d-block">₱ 100000</span>
-                  <p class="card-text mb-0"><small class="text-muted"></small></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card job-card mb-2">
-              <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start w-100">
-                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
-                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
-                  </div>
-                </div>
-                <h6 class="card-subtitle text-muted">ITSM</h6>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                  <span class="text-muted d-block">₱ 100000</span>
-                  <p class="card-text mb-0"><small class="text-muted"></small></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card job-card mb-2">
-              <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start w-100">
-                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
-                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
-                  </div>
-                </div>
-                <h6 class="card-subtitle text-muted">ITSM</h6>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                  <span class="text-muted d-block">₱ 100000</span>
-                  <p class="card-text mb-0"><small class="text-muted"></small></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card job-card mb-2">
-              <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start w-100">
-                  <div class=" card-sam d-flex align-items-center mb-3 w-100">
-                    <h6 class="card-title mb-0 mr-2">Programmer</h6>
-                    <span class="badge rounded-pill bg-primary ml-auto">PERMANENT</span>
-                  </div>
-                </div>
-                <h6 class="card-subtitle text-muted">ITSM</h6>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                  <span class="text-muted d-block">₱ 100000</span>
-                  <p class="card-text mb-0"><small class="text-muted"></small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
+            <?php include("php_connections/fetch_other_jobs.php") ?>
         </div>
       </div>
     </section>
   </div>
+  <?php include("footer.php") ?>
   <script src="assets/js/script_joblist_page.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

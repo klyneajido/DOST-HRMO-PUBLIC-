@@ -1,130 +1,198 @@
+<?php
+include_once 'php_connections/db_connection.php'; // Adjust the path as necessary
+
+// Get the job ID from the URL and validate it
+$job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
+
+if ($job_id > 0) {
+    // SQL query to fetch job title based on job ID
+    $sql = "SELECT position FROM job WHERE job_id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param("i", $job_id);
+        $stmt->execute();
+        $stmt->bind_result($job_title);
+        $stmt->fetch();
+        $stmt->close();
+    } else {
+        // Handle query preparation error
+        die("Error preparing query: " . $conn->error);
+    }
+} else {
+    die("Invalid job ID");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and validate inputs
+    $lastname = htmlspecialchars($_POST['lastname']);
+    $firstname = htmlspecialchars($_POST['firstname']);
+    $middlename = htmlspecialchars($_POST['middlename']);
+    $sex = htmlspecialchars($_POST['sex']);
+    $address = htmlspecialchars($_POST['address']);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $contact_number = htmlspecialchars($_POST['contact_number']);
+
+    // File upload handling function
+    function uploadFile($file, $upload_dir) {
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            $tmp_name = $file['tmp_name'];
+            $file_name = basename($file['name']);
+            $upload_path = $upload_dir . $file_name;
+
+            if (move_uploaded_file($tmp_name, $upload_path)) {
+                return $upload_path;
+            } else {
+                die("File upload failed for " . $file['name']);
+            }
+        } else {
+            die("File upload error for " . $file['name'] . ": " . $file['error']);
+        }
+    }
+
+    // Directory for file uploads
+    $upload_dir = 'uploads/';
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    // Upload files and get their paths
+    $application_letter = uploadFile($_FILES['application_letter'], $upload_dir);
+    $personal_data_sheet = uploadFile($_FILES['pds'], $upload_dir);
+    $performance_rating = isset($_FILES['performance_rating']) ? uploadFile($_FILES['performance_rating'], $upload_dir) : null;
+    $eligibility_rating_license = uploadFile($_FILES['certificate_eligibility'], $upload_dir);
+    $transcript_of_records = uploadFile($_FILES['transcript_records'], $upload_dir);
+    $certificate_of_employment = uploadFile($_FILES['certificate_employment'], $upload_dir);
+    $proof_of_ratings_seminars = uploadFile($_FILES['trainings_seminars'], $upload_dir);
+    $proof_of_rewards = isset($_FILES['awards']) ? uploadFile($_FILES['awards'], $upload_dir) : null;
+
+    // Prepare SQL statement using a prepared statement
+    $sql = "INSERT INTO applicants (lastname, firstname, middlename, sex, address, email, contact_number, application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_ratings_seminars, proof_of_rewards, job_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        // Bind parameters
+        $stmt->bind_param("sssssssssssssssi", $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_ratings_seminars, $proof_of_rewards, $job_id);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "Application submitted successfully.";
+            // Redirect or display success message
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        // Close statement
+        $stmt->close();
+    } else {
+        echo "Error preparing statement: " . $conn->error;
+    }
+
+    // Close connection
+    $conn->close();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Joblist</title>
-  <link rel="icon" type="image/png" href="assets/img/dost_logo.png">
-  <link rel="stylesheet" type="text/css" href="assets/css/style_applyform_page.css" />
-  <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
-
-  <script src="https://kit.fontawesome.com/0dcd39d035.js" crossorigin="anonymous"></script>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Apply for <?php echo htmlspecialchars($job_title); ?></title>
+    <link rel="icon" type="image/png" href="assets/img/dost_logo.png">
+    <link rel="stylesheet" type="text/css" href="assets/css/style_applyform_page.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/0dcd39d035.js" crossorigin="anonymous"></script>
 </head>
-
 <body class="scrollbar" id="style-5">
-
-  <div class="force-overflow">
-    <!-- Navbar -->
-    <?php include("navbar.php"); ?>
-    <!-- End of Navbar -->
-    <div class="col-md-6">
-      <!-- Empty column to create space -->
+    <div class="force-overflow">
+        <!-- Navbar -->
+        <?php include("navbar.php"); ?>
+        <!-- End of Navbar -->
+        <div class="col-md-6">
+            <!-- Empty column to create space -->
+        </div>
+        <section id="apply-job">
+            <div class="container mt-5">
+                <h2 class="mb-4">Apply for <?php echo htmlspecialchars($job_title); ?></h2>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?job_id=" . $job_id); ?>" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Lastname *</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Firstname *</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="middlename" class="form-label">Middlename *</label>
+                        <input type="text" class="form-control" name="middlename" id="middlename" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sex *</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sex" id="male" value="male" required>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sex" id="female" value="female" required>
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address *</label>
+                        <input type="text" class="form-control" name="address" id="address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Contact Number *</label>
+                        <input type="tel" class="form-control" name="contact_number" id="contact" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="application_letter" class="form-label">Application Letter *</label>
+                        <input type="file" class="form-control" name="application_letter" id="application_letter" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pds" class="form-label">Fully accomplished Personal Data Sheet with recent passport-sized picture *</label>
+                        <input type="file" class="form-control" name="pds" id="pds" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="performance_rating" class="form-label">Performance rating in the last rating period (if applicable)</label>
+                        <input type="file" class="form-control" name="performance_rating" id="performance_rating">
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificate_eligibility" class="form-label">Photocopy of certificate of eligibility/rating/license *</label>
+                        <input type="file" class="form-control" name="certificate_eligibility" id="certificate_eligibility" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="transcript_records" class="form-label">Photocopy of Transcript of Records *</label>
+                        <input type="file" class="form-control" name="transcript_records" id="transcript_records" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificate_employment" class="form-label">Photocopy of Certificate of Employment/s *</label>
+                        <input type="file" class="form-control" name="certificate_employment" id="certificate_employment" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="trainings_seminars" class="form-label">Proof of trainings and seminars attended *</label>
+                        <input type="file" class="form-control" name="trainings_seminars" id="trainings_seminars" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="awards" class="form-label">Proof of awards received (if applicable)</label>
+                        <input type="file" class="form-control" name="awards" id="awards">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </section>
+        <?php include("footer.php") ?>
     </div>
-<section id="apply-job">
-<div class="container form-container">
-    <h2 class="text-center form-title">Job Application Form</h2>
-    <form action="submit_application.php" method="POST">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="applicant_id">Applicant ID</label>
-                <input type="text" class="form-control" id="applicant_id" name="applicant_id" placeholder="Applicant ID">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="movement_id">Movement ID</label>
-                <input type="text" class="form-control" id="movement_id" name="movement_id" placeholder="Movement ID">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="middlename">Middle Name</label>
-                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="sex">Sex</label>
-                <select class="form-control" id="sex" name="sex">
-                    <option value="" selected disabled>Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="dob">Date of Birth</label>
-                <input type="date" class="form-control" id="dob" name="dob">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="maritalstatus">Marital Status</label>
-                <select class="form-control" id="maritalstatus" name="maritalstatus">
-                    <option value="" selected disabled>Select</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Widowed">Widowed</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="contact">Contact Number</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact Number">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="emergency_id">Emergency Contact ID</label>
-                <input type="text" class="form-control" id="emergency_id" name="emergency_id" placeholder="Emergency Contact ID">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="education_id">Education ID</label>
-                <input type="text" class="form-control" id="education_id" name="education_id" placeholder="Education ID">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="eligibility_id">Eligibility ID</label>
-                <input type="text" class="form-control" id="eligibility_id" name="eligibility_id" placeholder="Eligibility ID">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="emptraining_id">Employment Training ID</label>
-                <input type="text" class="form-control" id="emptraining_id" name="emptraining_id" placeholder="Employment Training ID">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
-    </form>
-</div>
-</section>
-  </div>
-  <script src="assets/js/script_joblist_page.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
