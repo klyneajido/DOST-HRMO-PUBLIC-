@@ -31,6 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = htmlspecialchars($_POST['address']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $contact_number = htmlspecialchars($_POST['contact_number']);
+    $course = htmlspecialchars($_POST['course']);
+    $years_of_experience = htmlspecialchars($_POST['years_of_experience']);
+    $hours_of_training = htmlspecialchars($_POST['hours_of_training']);
+    $eligibility = htmlspecialchars($_POST['eligibility']);
+    $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
 
     // File upload handling function
     function uploadFile($file, $upload_dir)
@@ -67,12 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $proof_of_rewards = isset($_FILES['awards']) ? uploadFile($_FILES['awards'], $upload_dir) : null;
 
     // Prepare SQL statement using a prepared statement
-    $sql = "INSERT INTO applicants (lastname, firstname, middlename, sex, address, email, contact_number, application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_ratings_seminars, proof_of_rewards, job_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO applicants (lastname, firstname, middlename, sex, address, email, contact_number, course, years_of_experience, hours_of_training, eligibility, list_of_awards, application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_ratings_seminars, proof_of_rewards, job_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         // Bind parameters
-        $stmt->bind_param("sssssssssssssssi", $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_ratings_seminars, $proof_of_rewards, $job_id);
+        $stmt->bind_param("ssssssssssssssssssssi", $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $course, $years_of_experience, $hours_of_training, $eligibility, $list_of_awards, $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_ratings_seminars, $proof_of_rewards, $job_id);
 
         // Execute the statement
         if ($stmt->execute()) {
@@ -156,40 +161,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="email" class="form-control" name="email" id="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="contact" class="form-label">Contact Number  <span class="red-asterisk">*</span></label>
+                        <label for="contact" class="form-label">Contact Number <span class="red-asterisk">*</span></label>
                         <input type="tel" class="form-control" name="contact_number" id="contact" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="application_letter" class="form-label">Application Letter  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="application_letter" id="application_letter" required>
+                        <label for="contact" class="form-label">Course <span class="red-asterisk">*</span></label>
+                        <input type="tel" class="form-control" name="course" id="course" required>
                     </div>
                     <div class="mb-3">
-                        <label for="pds" class="form-label">Fully accomplished Personal Data Sheet with recent passport-sized picture  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="pds" id="pds" required>
+                        <label for="contact" class="form-label">Years Of Experience<span class="red-asterisk">*</span></label>
+                        <input type="tel" class="form-control" name="years_of_experience" id="years_of_experience" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Hours Of Trainings <span class="red-asterisk">*</span></label>
+                        <input type="tel" class="form-control" name="hours_of_training" id="hours_of_training" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Eligibility <span class="red-asterisk">*</span></label>
+                        <input type="tel" class="form-control" name="eligibility" id="eligibility" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">List Of Awards <span class="red-asterisk">*</span></label>
+                        <input type="tel" class="form-control" name="list_of_awards" id="list_of_awards" required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="application_letter" class="form-label">Application Letter <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="application_letter" id="application_letter"  accept="application/pdf" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pds" class="form-label">Fully accomplished Personal Data Sheet with recent passport-sized picture <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="pds" id="pds" accept="application/pdf" required>
                     </div>
                     <div class="mb-3">
                         <label for="performance_rating" class="form-label">Performance rating in the last rating period (if applicable)</label>
-                        <input type="file" class="form-control" name="performance_rating" id="performance_rating">
+                        <input type="file" class="form-control" name="performance_rating" id="performance_rating" accept="application/pdf">
                     </div>
                     <div class="mb-3">
-                        <label for="certificate_eligibility" class="form-label">Photocopy of certificate of eligibility/rating/license  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="certificate_eligibility" id="certificate_eligibility" required>
+                        <label for="certificate_eligibility" class="form-label">Photocopy of certificate of eligibility/rating/license <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="certificate_eligibility" id="certificate_eligibility" accept="application/pdf" required>
                     </div>
                     <div class="mb-3">
-                        <label for="transcript_records" class="form-label">Photocopy of Transcript of Records  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="transcript_records" id="transcript_records" required>
+                        <label for="transcript_records" class="form-label">Photocopy of Transcript of Records <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="transcript_records" id="transcript_records" accept="application/pdf" required>
                     </div>
                     <div class="mb-3">
-                        <label for="certificate_employment" class="form-label">Photocopy of Certificate of Employment/s  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="certificate_employment" id="certificate_employment" required>
+                        <label for="certificate_employment" class="form-label">Photocopy of Certificate of Employment/s <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="certificate_employment" id="certificate_employment" accept="application/pdf" required>
                     </div>
                     <div class="mb-3">
-                        <label for="trainings_seminars" class="form-label">Proof of trainings and seminars attended  <span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="trainings_seminars" id="trainings_seminars" required>
+                        <label for="trainings_seminars" class="form-label">Proof of trainings and seminars attended <span class="red-asterisk">*</span></label>
+                        <input type="file" class="form-control" name="trainings_seminars" id="trainings_seminars" accept="application/pdf" required>
                     </div>
                     <div class="mb-3">
                         <label for="awards" class="form-label">Proof of awards received (if applicable)</label>
-                        <input type="file" class="form-control" name="awards" id="awards">
+                        <input type="file" class="form-control" name="awards" id="awards" accept="application/pdf">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Application</button>
                 </form>
