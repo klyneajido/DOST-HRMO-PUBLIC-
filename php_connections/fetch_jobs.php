@@ -21,7 +21,7 @@ if ($stmt->fetch()) {
                     <h6><?php echo htmlspecialchars($position); ?></h6>
                     <div class="mt-3">
                         <span class='text-muted d-block'><i class='fa fa-building' aria-hidden='true'></i> <a href='#' target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
-                        <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i> ₱ <?php echo htmlspecialchars($monthlysalary); ?></span>
+                        <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i> ₱<?php echo htmlspecialchars(number_format($monthlysalary)); ?></span>
                     </div>
                     <div class="mt-3">
                         <a href="job_description.php?job_id=<?php echo $job_id; ?>" class="btn btn-primary">View Details</a>

@@ -14,6 +14,7 @@ if ($stmt->fetch()) {
     // If there are rows, display them
     do {
 ?>
+<a href="job_description.php?job_id=<?php echo $job_id; ?>">
         <div class="card job-card mb-2">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-start w-100">
@@ -24,11 +25,12 @@ if ($stmt->fetch()) {
                 </div>
                 <h6 class="card-subtitle text-muted"><?php echo htmlspecialchars($department_name); ?></h6>
                 <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                    <span class="text-muted d-block">₱<?php echo htmlspecialchars($monthlysalary); ?></span>
+                    <span class="text-muted d-block">₱<?php echo htmlspecialchars(number_format($monthlysalary)); ?></span>
                     <p class="card-text mb-0"><small class="text-muted"></small></p>
                 </div>
             </div>
         </div>
+        </a>
 <?php
     } while ($stmt->fetch()); // Fetch next row
 } else {

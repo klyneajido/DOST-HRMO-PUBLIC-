@@ -8,7 +8,7 @@ $permanent = isset($_GET['permanent']) ? $_GET['permanent'] : '';
 $cos = isset($_GET['cos']) ? $_GET['cos'] : '';
 
 // Build query with filters
-$sql = "SELECT job.position, department.name, job.monthlysalary, job.status, job.created_at, job.updated_at
+$sql = "SELECT job.job_id, job.position, department.name, job.monthlysalary, job.status, job.created_at, job.updated_at
         FROM job 
         JOIN department ON job.department_id = department.department_id
         WHERE 1=1";
@@ -28,13 +28,14 @@ if (!empty($cos)) {
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$stmt->bind_result($position, $department_name, $monthlysalary, $status, $created_at, $updated_at);
+$stmt->bind_result($job_id,$position, $department_name, $monthlysalary, $status, $created_at, $updated_at);
 
 // Check if there are rows fetched
 if ($stmt->fetch()) {
     // If there are rows, display them
     do {
 ?>
+<a href="job_description.php?job_id=<?php echo $job_id; ?>">
 <div class="card job-card">
     <div class="card-body p-1">
         <div class="d-flex justify-content-between align-items-start">
@@ -62,11 +63,12 @@ if ($stmt->fetch()) {
 
         <div
             class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-            <span class='text-muted d-block'>₱ <?php echo htmlspecialchars($monthlysalary); ?></span>
+            <span class='text-muted d-block'>₱ <?php echo htmlspecialchars(number_format($monthlysalary)); ?></span>
             <p class="card-text mb-0"><small class="text-muted"><?php echo time_ago(htmlspecialchars($created_at)); ?></small></p>
         </div>
     </div>
 </div>
+</a>
 <?php
     } while ($stmt->fetch()); // Fetch next row
 } else {
