@@ -22,22 +22,19 @@ $rowsFetched = false;
 while ($stmt->fetch()) {
     $rowsFetched = true;
     ?>
+   
     <div class="slider-card">
         <div class="d-flex justify-content-center align-items-center mb-4">
-
+        <a href="<?php echo htmlspecialchars($link); ?>"target="_blank">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($image); ?>" alt="Announcement Image">
+            </a>
         </div>
         <h5 class="mb-0 text-center"><b><?php echo htmlspecialchars($title); ?></b></h5>
         <p class="text-center p-4"><?php echo htmlspecialchars($description); ?></p>
-        <div class="text-center">
-            <a href="<?php echo htmlspecialchars($link); ?>" class="btn btn-primary">Read More</a>
-        </div>
     </div>
+   
     <?php
 }
-
-// Debug message to check if PHP script is running
-echo "<p>PHP Script Executed</p>";
-
 if (!$rowsFetched) {
     echo "<p>No announcements found.</p>";
 }
