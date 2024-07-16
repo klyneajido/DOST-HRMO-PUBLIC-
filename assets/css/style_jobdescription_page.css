@@ -6,7 +6,7 @@ html {
   margin: 0;
 }
 body {
-  font-family: "Montserrat", sans-serif !important;
+  font-family:"Montserrat", Helvetica, Arial, sans-serif !important;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -240,7 +240,7 @@ header .navigation-wrap {
 #style-5::-webkit-scrollbar-thumb {
   background-color: #0ae;
 
-  background-image: -webkit-gradient(
+  background-image: --webkit-gradient(
     linear,
     0 0,
     0 100%,
@@ -251,6 +251,41 @@ header .navigation-wrap {
 }
 
 /* Job Description */
-#job_description{
-    margin-top: 120px;
+#job-title{
+    margin-top: 150px;
+    margin-bottom: 40px;
+}
+.job-detail__apply-top .btn {
+  color: rgb(0, 24, 97);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid rgb(0, 24, 97);
+  padding: 10px 20px;
+  font-size: 17px;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  transition: all 1s;
+  overflow: hidden;
+}
+
+.job-detail__apply-top  .btn:hover {
+  color: white;
+}
+
+.job-detail__apply-top  .btn::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0;
+  left: -40px;
+  transform: skewX(45deg);
+  background-color: rgb(0, 24, 97);
+  z-index: -1;
+  transition: all 1s;
+}
+
+.job-detail__apply-top  .btn:hover::before {
+  width: 160%;
 }

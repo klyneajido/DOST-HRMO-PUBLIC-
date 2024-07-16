@@ -2,12 +2,12 @@
 include_once 'db_connection.php'; // Adjust the path as necessary
 
 // SQL query to fetch jobs data including department name
-$sql = "SELECT job.job_id, job.position, department.name, job.monthlysalary, job.status
+$sql = "SELECT job.job_id, job.position, department.name, job.salary, job.status
         FROM job 
         JOIN department ON job.department_id = department.department_id";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$stmt->bind_result($job_id, $position, $department_name, $monthlysalary, $status);
+$stmt->bind_result($job_id, $position, $department_name, $salary, $status);
 
 // Check if there are rows fetched
 if ($stmt->fetch()) {
@@ -15,21 +15,25 @@ if ($stmt->fetch()) {
     do {
 ?>
 <a href="job_description.php?job_id=<?php echo $job_id; ?>">
-        <div class="card job-card mb-2">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-start w-100">
-                    <div class=" card-sam d-flex align-items-center mb-3 w-100">
-                        <h6 class="card-title mb-0 mr-2"><?php echo htmlspecialchars($position); ?></h6>
-                        <span class="badge rounded-pill bg-primary ml-auto"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
+
+        <div class="col-lg col-md-10 col-12 mt-4 pt-2">
+            <div class="card border-0 bg-light rounded shadow custom-card ">
+                <div class="card-body p-4">
+                    <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
+                    <h6><?php echo htmlspecialchars($position); ?></h6>
+                    <div class="mt-3">
+                        <span class='text-muted d-block'><a href='#' target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
+                        <span class='text-muted d-block'>₱<?php echo htmlspecialchars(number_format($salary)); ?></span>
                     </div>
-                </div>
-                <h6 class="card-subtitle text-muted"><?php echo htmlspecialchars($department_name); ?></h6>
-                <div class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center w-100">
-                    <span class="text-muted d-block">₱<?php echo htmlspecialchars(number_format($monthlysalary)); ?></span>
-                    <p class="card-text mb-0"><small class="text-muted"></small></p>
+
                 </div>
             </div>
-        </div>
+        </div><!--end col-->
+
+
+
+
+
         </a>
 <?php
     } while ($stmt->fetch()); // Fetch next row
