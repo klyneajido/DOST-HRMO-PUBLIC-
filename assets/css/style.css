@@ -360,7 +360,7 @@ body.hero-anime p {
 .btn-outline-primary.active,
 .btn-outline-primary.focus,
 .btn-outline-primary:not(:disabled):not(.disabled):active {
-  box-shadow: 0 3px 7px rgb(109 199 122 / 50%) !important;
+  box-shadow: 0 3px 7px rgba(55, 67, 233, 0.5) !important;
 }
 #job-list .btn-primary,
 .btn-outline-primary,
@@ -675,3 +675,4 @@ body.hero-anime p {
     font-weight: 600;
   }
 }
+

@@ -255,37 +255,268 @@ header .navigation-wrap {
     margin-top: 150px;
     margin-bottom: 40px;
 }
-.job-detail__apply-top .btn {
-  color: rgb(0, 24, 97);
+
+.heading {
+  text-align: center;
+  margin-bottom: 40px;
   text-transform: uppercase;
-  text-decoration: none;
-  border: 2px solid rgb(0, 24, 97);
-  padding: 10px 20px;
-  font-size: 17px;
-  font-weight: bold;
-  background: transparent;
+  letter-spacing: 0.1em;
+}
+.heading:after {
+  content: " ";
+  display: block;
+  width: 100px;
+  height: 2px;
+  margin: 20px auto 20px;
+  background: #063ac9;
+}
+#job-title p{
+  color: #4460ae;
+}
+
+.job-detail-description {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  color: #868e96;
+  font-size: 0.9rem;
+  margin-bottom:0px;
+}
+
+.job-detail-description {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  color: #868e96;
+  font-size: 0.9rem;
+}
+.heading small {
+  font-size: 1.4rem;
+}
+/*======================================
+    Job Details CSS
+========================================*/
+.job-details {
+  background-color: #f6f9fc;
+}
+
+.job-details .job-details-inner {
+  padding: 40px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+
+.job-details .job-details-head {
+  margin-bottom: 30px;
   position: relative;
-  transition: all 1s;
-  overflow: hidden;
+  z-index: 1;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #EDEDED;
 }
 
-.job-detail__apply-top  .btn:hover {
-  color: white;
+.job-details .job-details-head .content .meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  color: #7E8890;
+  display: block;
+  margin-top: 10px;
 }
 
-.job-detail__apply-top  .btn::before {
-  content: '';
+.job-details .job-details-head .salary-type .salary-range {
+  font-weight: 500;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+  color: #7E8890;
+}
+
+.job-details .job-details-head .badge {
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  position: relative;
+  background: #2042e314;
+  color: #2042e3;
+  padding: 8px 12px;
+  border-radius: 3px;
+  font-weight: 400;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.job-details .job-details-head li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.job-details .job-details-head li i {
+  color: #2042e3;
+}
+
+.job-details .job-details-head li:last-child {
+  margin-right: 0;
+}
+
+.job-details .job-details-head li a {
+  color: #2042e3;
+  font-weight: 500;
+}
+
+.job-details .job-details-head li a:hover {
+  text-decoration: underline;
+}
+
+.job-details .job-details-body h6 {
+  font-size: 20px;
+}
+
+.job-details .job-details-body p {
+  margin: 20px 0;
+}
+
+.job-details .job-details-body ul {
+  margin-left: 10px;
+}
+
+.job-details .job-details-body ul li {
+  display: block;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.job-details .job-details-body ul li::before {
   position: absolute;
-  height: 100%;
-  width: 0%;
-  top: 0;
-  left: -40px;
-  transform: skewX(45deg);
-  background-color: rgb(0, 24, 97);
-  z-index: -1;
-  transition: all 1s;
+  content: "";
+  left: 0;
+  top: 8px;
+  height: 6px;
+  width: 6px;
+  display: block;
+  border-radius: 50%;
+  background-color: #2042e3;
 }
 
-.job-detail__apply-top  .btn:hover::before {
-  width: 160%;
+.job-details .job-details-body ul li:last-child {
+  margin-bottom: 0;
 }
+
+.job-details .job-details-sidebar .sidebar-widget {
+  padding: 40px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+.job-details .job-details-sidebar .sidebar-widget:last-child {
+  margin-bottom: 0;
+}
+
+.job-details .job-details-sidebar .sidebar-widget .title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1;
+  position: relative;
+  padding-left: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  text-transform: capitalize;
+}
+
+.job-details .job-details-sidebar .sidebar-widget .title::before {
+  position: absolute;
+  left: 0;
+  top: 1px;
+  height: 100%;
+  width: 3px;
+  background-color: #2042e3;
+  content: '';
+}
+
+.job-details .job-details-sidebar .sidebar-widget .list-unstyled li {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.job-details .job-details-sidebar .sidebar-widget .list-unstyled li strong {
+  color: #081828;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 2px;
+}
+
+.job-details .job-details-sidebar .sidebar-widget .list-unstyled li:last-child {
+  margin-bottom: 0;
+}
+.job-details .job-details-inner {
+  padding: 30px !important;
+}
+.job-details .job-details-inner {
+  padding: 40px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+
+.job-details .content {
+  padding: 0 !important;
+  display: block;
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+}
+.job-details .company-logo {
+  padding-left: 0 !important;
+}
+.job-details .title {
+  display: block;
+  margin-top: 10px;
+}
+.job-details .job-details-head .salary-type {
+  -webkit-box-ordinal-group: 1 !important;
+      -ms-flex-order: 0 !important;
+          order: 0 !important;
+}
+.job-details .job-details-sidebar .sidebar-widget:first-child {
+  margin-top: 30px !important;
+}
+.job-details .job-details-inner {
+  margin-top: 30px !important;
+}
+button {
+  padding: 0.8em 1.8em;
+  border: 2px solid #2824f8;
+  background-color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: inherit;
+  color: #2824f8;
+  cursor: pointer;
+  position: relative;
+  width: 200px;/* Ensure any pseudo-elements are positioned relative to the button */
+}
+
+button:hover {
+  background-color: #2824f8;
+  color: #ffffff;
+}
+
+ 
+ 
