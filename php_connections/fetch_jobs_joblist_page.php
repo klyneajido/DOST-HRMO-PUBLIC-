@@ -8,7 +8,7 @@ $permanent = isset($_GET['permanent']) ? $_GET['permanent'] : '';
 $cos = isset($_GET['cos']) ? $_GET['cos'] : '';
 
 // Build query with filters
-$sql = "SELECT job.job_id, job.position, department.name, job.salary, job.status, job.created_at, job.updated_at
+$sql = "SELECT job.job_id, job.position, job.description, job.place_of_assignment, department.name, job.salary, job.status, job.created_at, job.updated_at
         FROM job 
         JOIN department ON job.department_id = department.department_id
         WHERE 1=1";
@@ -28,54 +28,42 @@ if (!empty($cos)) {
 
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$stmt->bind_result($job_id,$position, $department_name, $salary, $status, $created_at, $updated_at);
+$stmt->bind_result($job_id, $position, $description, $place_of_assignment, $department_name, $salary, $status, $created_at, $updated_at);
 
 // Check if there are rows fetched
+$counter = 0;
 if ($stmt->fetch()) {
+    echo '<div class="row">';
     // If there are rows, display them
     do {
-?>
-<a href="job_description.php?job_id=<?php echo $job_id; ?>">
-<div class="card job-card">
-    <div class="card-body p-1">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="d-flex align-items-center mb-3">
-                    <h5 class="card-title mb-0 mr-2"><?php echo htmlspecialchars($position); ?></h5>
-                    <span class="badge rounded-pill bg-primary"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
-                </div>
-                <h6 class="card-subtitle text-muted"><?php echo htmlspecialchars($department_name); ?></h6>
-            </div>
-            <div class="text-right d-flex align-items-center">
-                <a href="#" class="card-link d-none d-sm-block"><i class="far fa-bookmark h5"></i></a>
-                <div class="dropdown d-sm-none">
-                    <a class="dropdown-toggle" href="#" role="button" id="bookmarkDropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fas fa-ellipsis-v h5"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="bookmarkDropdown">
-                        <li><a class="dropdown-item" href="#"><i class="far fa-bookmark"></i> Bookmark</a></li>
-                        <!-- Add other options as needed -->
-                    </ul>
-                </div>
-            </div>
+        if ($counter % 2 == 0 && $counter != 0) {
+            echo '</div><div class="row">';
+        }
+?><div class="col-lg-6 col-md-6 col-12 mt-4 pt-2 border border-warning">
+<div class="card border-0 bg-light rounded shadow">
+    <div class="card-body p-4">
+        <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
+        <h6><?php echo htmlspecialchars($position); ?></h6>
+        <div class="mt-3">
+            <span class='text-muted d-block'><i class='fa fa-building' aria-hidden='true'></i> <a href='#' target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
+            <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i> ₱<?php echo htmlspecialchars(number_format($salary)); ?></span>
         </div>
-
-        <div
-            class="text-right text-sm-left text-center mt-3 mt-sm-0 d-sm-flex justify-content-sm-between align-items-sm-center">
-            <span class='text-muted d-block'>₱ <?php echo htmlspecialchars(number_format($salary)); ?></span>
-            <p class="card-text mb-0"><small class="text-muted"><?php echo time_ago(htmlspecialchars($created_at)); ?></small></p>
+        <div class="mt-3">
+            <a href="job_description.php?job_id=<?php echo $job_id; ?>" class="btn btn-primary">View Details</a>
         </div>
     </div>
 </div>
-</a>
+</div><!--end col-->
 <?php
+        $counter++;
     } while ($stmt->fetch()); // Fetch next row
+    echo '</div>';
 } else {
     // If no rows found
     echo "No jobs found.";
 }
 
+// Function to display time ago
 function time_ago($timestamp)
 {
     $current_time = time();

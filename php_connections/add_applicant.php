@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
 
     // Directory for file uploads
-    $upload_dir = 'uploads/';
+    $upload_dir = '"Users/User/OneDrive - lorma.edu/Desktop/uploads"';
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true); // Adjust directory permissions as necessary
     }

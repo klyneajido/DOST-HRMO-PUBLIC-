@@ -12,11 +12,7 @@
   <div class="row">
     <div class="col-md-6 col-sm-12">
       <h6>About</h6>
-      <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.</p>
+      <p class="text-justify">Welcome to the DOST HRMO Region 1 Job Application Portal, designed to streamline your application process for job opportunities within the Department of Science and Technology Region 1. Explore various job openings, submit your applications online, and stay updated on your application status with ease. Join us in driving scientific and technological advancements in Region 1. We are committed to a fair, transparent, and accessible hiring process, promoting diversity, and supporting your professional growth. Thank you for considering a career with us.</p>
     </div>
     <div class="col-md-6 col-sm-12">
       <h6>Quick Links</h6>

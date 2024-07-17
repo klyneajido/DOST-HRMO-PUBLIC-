@@ -297,65 +297,180 @@ header .navigation-wrap {
 a:link{
     text-decoration:none;
 }    
-  /* ? Job List */
-  .hero {
-    margin-top: 80px;
-    /* Adjust this value to move the section below the navbar */
-    padding: 50px 0;
-    /* Add padding to make it bigger */
-    background-color: #f8f9fa;
-    /* Optional: add background color */
+
+/*======================================
+    Find Job CSS
+========================================*/
+.find-job {
+  background-color: #f6f9fc;
+  margin-top: 120px;
 }
 
-.search-bar input {
-    height: 60px;
-    /* Increase height of the input fields */
-    font-size: 18px;
-    /* Increase font size */
+.find-job .section-title {
+  margin-bottom: 50px;
 }
 
-.search-bar button {
-    height: 60px;
-    /* Increase height of the button */
-    font-size: 18px;
-    /* Increase font size */
+.find-job.job-list {
+  padding-top: 70px;
 }
 
-h1 {
-    font-size: 48px;
-    /* Increase font size of the heading */
+.find-job .single-job {
+  margin-top: 30px;
+  padding: 40px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  background-color: #fff;
 }
 
-.badge {
-    font-size: 16px;
-    /* Increase font size of the badges */
-    padding: 10px 20px;
-    /* Increase padding of the badges */
+.find-job .single-job:hover {
+  -webkit-box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
+          box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
 }
 
-.job-card {
-    margin-bottom: 20px;
-    /* Add margin between job cards */
-    padding: 20px;
-    /* Add padding inside the card */
+.find-job .single-job .job-image {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  margin-top: -25px;
 }
 
-.job-card .card-title {
-    font-size: 24px;
-    /* Increase font size of the job title */
+.find-job .single-job .job-content {
+  position: relative;
 }
 
-.job-card .card-subtitle {
-    font-size: 18px;
-    /* Increase font size of the subtitle */
+.find-job .single-job .job-content h4 {
+  position: relative;
+
 }
 
-.job-card .card-text {
-    font-size: 16px;
-    /* Increase font size of the text */
+.find-job .single-job .job-content h4 a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #081828;
 }
 
-.container-wide {
-    width: 100%;
-    padding: 0 50px;
+.find-job .single-job .job-content h4 a:hover {
+  color: #2042e3;
+}
+
+.find-job .single-job .job-content p {
+  display: inline-block;
+  border-top: 1px solid #eee;
+  padding-top: 18px;
+}
+
+.find-job .single-job .job-content ul {
+  margin-top: 20px;
+}
+
+.find-job .single-job .job-content ul li {
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  position: relative;
+  background: #2042e314;
+  color: #2042e3;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.find-job .single-job .job-content ul li:last-child {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+
+.find-job .single-job .job-content ul li i {
+  font-size: 13px;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.find-job .single-job .job-content ul li a {
+  color: #777;
+}
+
+.find-job .single-job .job-content ul li a:hover {
+  color: #2042e3;
+}
+
+.find-job .single-job .job-button {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+
+.find-job .single-job .job-button ul li {
+  display: inline-block;
+}
+
+.find-job .single-job .job-button ul li a {
+  padding: 5px 20px;
+  border: 1px solid #eee;
+  color: #081828;
+  border-radius: 4px;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.find-job .single-job .job-button ul li a:hover {
+  color: #fff;
+  background-color: #2042e3;
+  border-color: transparent;
+}
+span {
+  padding: 5px 20px;
+  background-color: #2042e3;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.find-job .search-job .search-nner {
+  padding: 30px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.find-job .search-job .search-nner input {
+  height: 50px;
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #081828;
+  padding: 0px 20px;
+}
+
+.find-job .search-job .search-nner .btn {
+  width: 100%;
+}
+.position-relative {
+  position: relative; /* This makes the parent container relative */
+}
+
+.status-span {
+  position: absolute; /* This makes the span absolutely positioned within the parent container */
+  top: 0; /* Aligns the span to the top */
+  right: 0; /* Aligns the span to the right */
+  padding: 5px 20px; /* Optional padding for styling */
+  background-color: #2042e3; /* Optional background color */
+  color: #fff; /* Optional text color */
+  font-size: 11px; /* Optional font size */
+  text-transform: capitalize; /* Optional text transformation */
+}
+
+@media (max-width: 767.98px) { /* Adjust the max-width as needed for your breakpoints */
+  .status-span {
+      position: static; /* Reverts position to static on smaller screens */
+      margin-top: 10px; /* Adds margin for spacing */
+  }
 }

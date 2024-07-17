@@ -25,46 +25,53 @@
         <!-- Navbar -->
         <?php include ("navbar.php"); ?>
         <!-- End of Navbar -->
-        <section id="job-list">
+    <!-- Start Find Job Area -->
+     </div>
 
-            <div class="container-fluid hero">
-
-                <div class="container-wide">
-                    <h1 class="mb-4">Find Your Dream Job Here</h1>
+    <section class="find-job section mt-5">
+        <div class="search-job">
+            <div class="container">
+                <div class="search-nner">
                     <div class="row">
-                        <div class="col-lg-10 mx-auto">
-                        <div class="search-bar d-flex">
-    <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Job title or keyword">
-    <button class="btn btn-primary ml-2" onclick="applyFilters()">Search</button>
-</div>
-
-<div class="container-wide mt-5">
-    <div class="row">
-        <div class="col-lg-3">
-            <h5>Filter</h5>
-            <input type="text" id="companySkillTag" name="companySkillTag" class="form-control mb-3" placeholder="Company, skill, tag...">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="permanent" id="permanent">
-                <label class="form-check-label" for="permanent">
-                    Permanent
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="cos" id="cos">
-                <label class="form-check-label" for="cos">
-                    COS
-                </label>
+                        <div class="col-lg-5 col-md-5 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Location: City, State, Zip">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-xs-12 button">
+                            <button type="submit" class="btn btn-common float-right">Filter</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-9" id="job-list-container">
-            <!-- Job cards will be displayed here -->
-            <?php include("./php_connections/fetch_jobs_joblist_page.php"); ?>
+        <div class="job-card-container container">
+            <div class="single-head ">
+                <div class="row">
+                    <?php include ("php_connections/fetch_jobs_joblist_page.php"); ?>
+                    </div>
+                <!-- Pagination -->
+                <div class="row ">
+                    <div class="col-12">
+                        <div class="pagination center">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Pagination -->
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- /End Find Job Area -->
 
-        </section>
-    </div>
     <?php include("footer.php") ?>
     <script src="assets/js/script_joblist_page.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
