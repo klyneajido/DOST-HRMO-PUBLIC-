@@ -315,8 +315,8 @@ a:link{
 }
 
 .find-job .single-job {
-  margin-top: 30px;
-  padding: 40px;
+  margin-top: 20px;
+  padding: 30px;
   border: 1px solid #eee;
   border-radius: 5px;
   position: relative;
@@ -453,24 +453,25 @@ span {
 .find-job .search-job .search-nner .btn {
   width: 100%;
 }
+
 .position-relative {
-  position: relative; /* This makes the parent container relative */
+  position: relative;
 }
 
 .status-span {
-  position: absolute; /* This makes the span absolutely positioned within the parent container */
-  top: 0; /* Aligns the span to the top */
-  right: 0; /* Aligns the span to the right */
-  padding: 5px 20px; /* Optional padding for styling */
-  background-color: #2042e3; /* Optional background color */
-  color: #fff; /* Optional text color */
-  font-size: 11px; /* Optional font size */
-  text-transform: capitalize; /* Optional text transformation */
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 20px;
+  background-color: #2042e3;
+  color: #fff;
+  font-size: 11px;
+  text-transform: capitalize;
 }
 
 @media (max-width: 767.98px) { /* Adjust the max-width as needed for your breakpoints */
   .status-span {
-      position: static; /* Reverts position to static on smaller screens */
-      margin-top: 10px; /* Adds margin for spacing */
+      position: static;
+      margin-top: 10px;
   }
 }

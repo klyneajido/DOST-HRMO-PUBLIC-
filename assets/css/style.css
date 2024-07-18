@@ -458,7 +458,7 @@ body.hero-anime p {
 #style-5::-webkit-scrollbar-thumb {
   background-color: #0ae;
 
-  background-image: -webkit-gradient(
+  background-image: --webkit-gradient(
     linear,
     0 0,
     0 100%,

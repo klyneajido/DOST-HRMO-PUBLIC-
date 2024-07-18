@@ -25,8 +25,8 @@
         <!-- Navbar -->
         <?php include ("navbar.php"); ?>
         <!-- End of Navbar -->
-    <!-- Start Find Job Area -->
-     </div>
+        <!-- Start Find Job Area -->
+    </div>
 
     <section class="find-job section mt-5">
         <div class="search-job">
@@ -48,9 +48,9 @@
         </div>
         <div class="job-card-container container">
             <div class="single-head ">
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <?php include ("php_connections/fetch_jobs_joblist_page.php"); ?>
-                    </div>
+                </div>
                 <!-- Pagination -->
                 <div class="row ">
                     <div class="col-12">

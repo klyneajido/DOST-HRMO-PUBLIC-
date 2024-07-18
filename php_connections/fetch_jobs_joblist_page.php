@@ -39,21 +39,29 @@ if ($stmt->fetch()) {
         if ($counter % 2 == 0 && $counter != 0) {
             echo '</div><div class="row">';
         }
-?><div class="col-lg-6 col-md-6 col-12 mt-4 pt-2 border border-warning">
-<div class="card border-0 bg-light rounded shadow">
-    <div class="card-body p-4">
-        <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
-        <h6><?php echo htmlspecialchars($position); ?></h6>
-        <div class="mt-3">
-            <span class='text-muted d-block'><i class='fa fa-building' aria-hidden='true'></i> <a href='#' target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
-            <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i> ₱<?php echo htmlspecialchars(number_format($salary)); ?></span>
-        </div>
-        <div class="mt-3">
-            <a href="job_description.php?job_id=<?php echo $job_id; ?>" class="btn btn-primary">View Details</a>
-        </div>
+?>
+<div class="col-lg-6 col-md-12 pt-2 ">
+    <!-- Single Job -->
+    <div class="single-job ">
+        <div class="job-content">
+            <div class="job-title row d-flex justify-content-between border border-warning ">
+                <h4 class="col-lg-9 col-md-9"><a href=""><?php echo htmlspecialchars($position)?></a></h4>
+                <div class="col-lg-3 col-md-3 border border-danger position-relative">
+        <span class="status-span"><?php echo htmlspecialchars($status)?></span>
     </div>
+            </div>
+            <p><?php echo htmlspecialchars($description)?></p>
+            <ul>
+                <li><i class="lni lni-website"></i><a href="#"> winbrans.com</a></li>
+                <li><i class="lni lni-dollar"></i> $20k - $25k</li>
+                <li><i class="lni lni-map-marker"></i> New York</li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- End Single Job -->
 </div>
-</div><!--end col-->
+<!--end col-->
 <?php
         $counter++;
     } while ($stmt->fetch()); // Fetch next row
