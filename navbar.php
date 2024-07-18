@@ -1,9 +1,10 @@
 <header class="hero-anime">
       <div class="navigation-wrap bg-light start-header start-style">
+      <link rel="stylesheet" href="assets/css/navbar.css">
         <div class="container">
           <div class="row">
             <div class="nav-container col-12">
-              <nav class="navbar navbar-expand-md navbar-light">
+              <nav class="navbar navbar-expand-md navbar-dark">
                 <a class="navbar-brand" href="index.php">
                   <img src="assets/img/DOST-logo.png" alt="" />
                 </a>

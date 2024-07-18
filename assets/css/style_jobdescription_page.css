@@ -21,210 +21,6 @@ body {
   width: 100%;
   margin: 0;
 }
-
-
-/* #Navigation
-================================================== */
-header .navigation-wrap {
-    background-color: rgb(0, 24, 97) !important;
-  }
-  
-  .start-header {
-    opacity: 1;
-    transform: translateY(0);
-    padding: 10px 0;
-    box-shadow: 0 10px 30px 0 rgba(138, 155, 165, 0.15);
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    background-color: rgb(0, 24, 97);
-  }
-  .start-header.scroll-on {
-    box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
-    padding: 5px 0;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    background-color: rgb(0, 24, 97);
-  }
-  .start-header.scroll-on .navbar-brand img {
-    height: 28px;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-  }
-  .navigation-wrap {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    background-color: rgb(0, 24, 97) !important;
-  }
-  .navbar-brand img {
-    height: 40px;
-    width: auto;
-    display: block;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-  }
-  
-  .navbar-light .navbar-toggler-icon {
-    width: 24px;
-    height: 17px;
-    position: relative;
-    border-bottom: 1px solid #000;
-    transition: all 300ms linear;
-  }
-  .navbar-light .navbar-toggler-icon:after,
-  .navbar-light .navbar-toggler-icon:before {
-    width: 24px;
-    position: absolute;
-    height: 1px;
-    background-color: #000;
-    top: 0;
-    left: 0;
-    content: "";
-    z-index: 2;
-    transition: all 300ms linear;
-  }
-  .navbar-light .navbar-toggler-icon:after {
-    top: 8px;
-  }
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
-    transform: rotate(45deg);
-  }
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
-    transform: translateY(8px) rotate(-45deg);
-  }
-  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-    border-color: transparent;
-  }
-  .nav-link {
-    color: #fff !important;
-    font-weight: 500;
-    transition: all 200ms linear;
-  }
-  .nav-item:hover .nav-link {
-    color: #8167a9 !important;
-  }
-  .nav-item.active .nav-link {
-    color: #777 !important;
-  }
-  .nav-link {
-    position: relative;
-    padding: 5px 0 !important;
-    display: inline-block;
-  }
-  .nav-item:after {
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    content: "";
-    background-color: #8167a9;
-    opacity: 0;
-    transition: all 200ms linear;
-  }
-  .nav-item:hover:after {
-    bottom: 0;
-    opacity: 1;
-  }
-  .nav-item.active:hover:after {
-    opacity: 0;
-  }
-  .nav-item {
-    position: relative;
-    transition: all 200ms linear;
-  }
-  
-  /* #Primary style
-  ================================================== */
-  
-  .bg-light {
-    transition: all 200ms linear;
-  }
-  .section {
-    position: relative;
-    width: 100%;
-    display: block;
-  }
-  .full-height {
-    height: 100vh;
-    background-color: red;
-  }
-  .over-hide {
-    overflow: hidden;
-  }
-  .absolute-center {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    margin-top: 40px;
-    transform: translateY(-50%);
-    z-index: 20;
-  }
-  body.hero-anime p {
-    opacity: 0;
-    transform: translateY(40px);
-    transition-delay: 1700ms;
-  }
-  
-  .navbar-custom {
-    background-color: #8167a9;
-  }
-  
-  /* #Media
-  ================================================== */
-  
-  @media (max-width: 767px) {
-    h1 {
-      font-size: 38px;
-    }
-    .nav-item:after {
-      display: none;
-    }
-    .nav-item::before {
-      position: absolute;
-      display: block;
-      top: 15px;
-      left: 0;
-      width: 11px;
-      height: 1px;
-      content: "";
-      border: none;
-      background-color: #000;
-    }
-    .dropdown-toggle::after {
-      position: absolute;
-      display: block;
-      top: 10px;
-      left: -23px;
-      width: 1px;
-      height: 11px;
-      content: "";
-      border: none;
-      background-color: #000;
-      transition: all 200ms linear;
-    }
-    .dropdown-toggle[aria-expanded="true"]::after {
-      transform: rotate(90deg);
-      opacity: 0;
-    }
-    .dropdown-menu {
-      padding: 0 !important;
-      background-color: transparent;
-      box-shadow: none;
-      transition: all 200ms linear;
-    }
-    .dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
-      margin-top: 10px !important;
-      margin-bottom: 20px !important;
-    }
-  }
-
-  
 /* SCROLLBAR */
 #style-5::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -497,22 +293,139 @@ header .navigation-wrap {
 .job-details .job-details-inner {
   margin-top: 30px !important;
 }
-button {
+.job-details button {
   padding: 0.8em 1.8em;
-  border: 2px solid #2824f8;
+  border: 2px solid rgb(0, 24, 97);
   background-color: transparent;
   text-align: center;
   text-transform: uppercase;
   font-size: 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: inherit;
-  color: #2824f8;
+  color: rgb(0, 24, 97);
   cursor: pointer;
   position: relative;
   width: 200px;/* Ensure any pseudo-elements are positioned relative to the button */
 }
 
 button:hover {
-  background-color: #2824f8;
+  background-color: rgb(0, 24, 97);
   color: #ffffff;
+}
+
+.more-jobs .bg-primary,
+.btn-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.badge-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.custom-control-input:checked ~ .custom-control-label:before,
+#preloader #status .spinner > div,
+.social-icon li a:hover,
+.back-to-top:hover,
+.back-to-home a,
+::selection,
+#topnav .navbar-toggle.open span:hover,
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots.clickable .owl-dot:hover span,
+.watch-video a .play-icon-circle,
+.sidebar .widget .tagcloud > a:hover,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.tns-nav button.tns-nav-active,
+.form-check-input.form-check-input:checked {
+  background-color: rgb(0, 24, 97)!important;
+}
+
+.more-jobs .badge {
+  padding: 5px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  font-size: 10px;
+}
+
+
+.more-jobs .btn-primary,
+.btn-outline-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.bg-soft-primary .border,
+.alert-primary,
+.alert-outline-primary,
+.badge-outline-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.form-group .form-control:focus,
+.form-group .form-control.active,
+.custom-control-input:checked ~ .custom-control-label:before,
+.custom-control-input:focus ~ .custom-control-label::before,
+.form-control:focus,
+.social-icon li a:hover,
+#topnav .has-submenu.active.active .menu-arrow,
+#topnav.scroll .navigation-menu > li:hover > .menu-arrow,
+#topnav.scroll .navigation-menu > li.active > .menu-arrow,
+#topnav .navigation-menu > li:hover > .menu-arrow,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.form-check-input:focus,
+.form-check-input.form-check-input:checked,
+.container-filter li.active,
+.container-filter li:hover {
+  background-color: rgb(0, 24, 97)!important;
+}
+.more-jobs .bg-primary,
+.btn-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.badge-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.custom-control-input:checked ~ .custom-control-label:before,
+#preloader #status .spinner > div,
+.social-icon li a:hover,
+.back-to-top:hover,
+.back-to-home a,
+::selection,
+#topnav .navbar-toggle.open span:hover,
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots.clickable .owl-dot:hover span,
+.watch-video a .play-icon-circle,
+.sidebar .widget .tagcloud > a:hover,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.tns-nav button.tns-nav-active,
+.form-check-input.form-check-input:checked {
+  background-color: rgb(0, 24, 97)!important;
+}
+.more-jobs .btn {
+  padding: 8px 20px;
+  outline: none;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  font-weight: 600;
+  border-radius: 5px;
+}
+.more-jobs .btn-primary {
+  background-color: rgb(0, 24, 97) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 7px rgb(109 199 122 / 50%);
+}
+
+.more-jobs a {
+  text-decoration: none;
 }

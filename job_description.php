@@ -106,8 +106,6 @@
                                             Location:</strong><?php echo htmlspecialchars($place_of_assignment)?></li>
                                     <li><strong>Salary:</strong>₱<?php echo htmlspecialchars(number_format($salary,2))?>
                                     </li>
-                                    <li><strong>Application Deadline:</strong><?php echo htmlspecialchars($deadline)?>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -121,10 +119,10 @@
     </div>
     <!-- End Job Details -->
     <section class="mb-5 more-jobs">
-        <div class="container mt-5 pt-4">
-            <h3>Other Jobs</h3>
+        <div class="container mt-5 pt-4 ">
+            <h3 class="text-center">Other Jobs</h3>
             <div class="row">
-                <?php include("php_connections/fetch_jobs.php") ?>
+                <?php include("php_connections/fetch_other_jobs.php") ?>
             </div>
         </div>
     </section>

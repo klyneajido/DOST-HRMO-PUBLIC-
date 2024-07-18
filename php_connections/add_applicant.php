@@ -63,7 +63,7 @@ $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
 
 if ($job_id > 0) {
     // SQL query to fetch job title based on job ID
-    $sql = "SELECT position FROM job WHERE job_id = ?";
+    $sql = "SELECT job_title FROM job WHERE job_id = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("i", $job_id);
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
 
     // Directory for file uploads
-    $upload_dir = '"Users/User/OneDrive - lorma.edu/Desktop/uploads"';
+    $upload_dir = 'C:/Users/User/OneDrive - lorma.edu/Desktop/uploads/';
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true); // Adjust directory permissions as necessary
     }
