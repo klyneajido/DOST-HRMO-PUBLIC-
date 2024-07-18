@@ -344,7 +344,7 @@ body.hero-anime p {
 .flatpickr-day.selected:hover,
 .tns-nav button.tns-nav-active,
 .form-check-input.form-check-input:checked {
-  background-color: rgb(0, 24, 97) !important;
+  background-color: rgb(0, 24, 97)!important;
 }
 
 #job-list .badge {
@@ -354,15 +354,7 @@ body.hero-anime p {
   font-size: 10px;
 }
 
-#job-list .btn-primary,
-.btn-outline-primary:hover,
-.btn-outline-primary:focus,
-.btn-outline-primary:active,
-.btn-outline-primary.active,
-.btn-outline-primary.focus,
-.btn-outline-primary:not(:disabled):not(.disabled):active {
-  box-shadow: 0 3px 7px rgba(55, 67, 233, 0.5) !important;
-}
+
 #job-list .btn-primary,
 .btn-outline-primary,
 .btn-outline-primary:hover,
@@ -393,7 +385,7 @@ body.hero-anime p {
 .form-check-input.form-check-input:checked,
 .container-filter li.active,
 .container-filter li:hover {
-  border-color: rgb(0, 24, 97) !important;
+  background-color: rgb(0, 24, 97)!important;
 }
 #job-list .bg-primary,
 .btn-primary,
@@ -421,7 +413,7 @@ body.hero-anime p {
 .flatpickr-day.selected:hover,
 .tns-nav button.tns-nav-active,
 .form-check-input.form-check-input:checked {
-  background-color: rgb(0, 24, 97) !important; /*Remote*/
+  background-color: rgb(0, 24, 97)!important;
 }
 #job-list .btn {
   padding: 8px 20px;
@@ -434,8 +426,7 @@ body.hero-anime p {
   border-radius: 5px;
 }
 #job-list .btn-primary {
-  background-color: rgba(0, 24, 97, 0.7) !important;
-  border: 1px solid rgb(0, 24, 97) !important;
+  background-color: rgb(0, 24, 97) !important;
   color: #fff !important;
   box-shadow: 0 3px 7px rgb(109 199 122 / 50%);
 }
@@ -535,7 +526,7 @@ body.hero-anime p {
   outline: none;
 }
 .owl-dots .owl-dot.active {
-  background: #f44336 !important;
+  background: rgb(0, 24, 97)!important;
 }
 
 .site-footer {
@@ -667,7 +658,7 @@ body.hero-anime p {
   background-color: #007bb6;
 }
 .social-icons a.dribbble:hover {
-  background-color: #ea4c89;
+  background-color: rgb(0, 24, 97)!important;
 }
 @media (max-width: 767px) {
   .social-icons li.title {

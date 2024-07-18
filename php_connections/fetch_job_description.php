@@ -11,7 +11,7 @@ $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
 
 if ($job_id > 0) {
   // SQL query to fetch job details based on job ID
-  $sql = "SELECT job.position, department.name, job.place_of_assignment, job.salary, job.status, job.description, job.education_requirement, job.experience_or_training, job.duties_and_responsibilities, job.deadline, job.created_at
+  $sql = "SELECT job.job_title, department.name, job.place_of_assignment, job.salary, job.status, job.description, job.education_requirement, job.experience_or_training, job.duties_and_responsibilities, job.deadline, job.created_at
             FROM job 
             JOIN department ON job.department_id = department.department_id
             WHERE job.job_id = ?";
@@ -19,7 +19,7 @@ if ($job_id > 0) {
   if ($stmt) {
     $stmt->bind_param("i", $job_id);
     $stmt->execute();
-    $stmt->bind_result($position, $department_name, $place_of_assignment, $salary, $status, $description, $education_requirement, $experience_or_training, $duties_and_responsibilities, $deadline, $created_at);
+    $stmt->bind_result($job_title, $department_name, $place_of_assignment, $salary, $status, $description, $education_requirement, $experience_or_training, $duties_and_responsibilities, $deadline, $created_at);
     $stmt->fetch();
     $stmt->close();
   } else {

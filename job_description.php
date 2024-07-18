@@ -34,7 +34,7 @@
 
     <section id="job-title">
         <div class="container">
-            <h1 class="heading"><?php echo htmlspecialchars($position) ?><br><small>of
+            <h1 class="heading"><?php echo htmlspecialchars($job_title) ?><br><small>of
                     <?php echo htmlspecialchars($department_name) ?></small></h1>
             <div class="job-detail-description"><i class="fa fa-map-marker job__location">
                 </i><?php echo htmlspecialchars($place_of_assignment) ?>

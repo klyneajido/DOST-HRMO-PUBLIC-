@@ -240,7 +240,7 @@ header .navigation-wrap {
 #style-5::-webkit-scrollbar-thumb {
   background-color: #0ae;
 
-  background-image: -webkit-gradient(
+  background-image: --webkit-gradient(
     linear,
     0 0,
     0 100%,
@@ -303,7 +303,7 @@ a:link{
 ========================================*/
 .find-job {
   background-color: #f6f9fc;
-  margin-top: 120px;
+  padding-top: 120px;
 }
 
 .find-job .section-title {
@@ -362,11 +362,13 @@ a:link{
 .find-job .single-job .job-content p {
   display: inline-block;
   border-top: 1px solid #eee;
-  padding-top: 18px;
+  padding-top: 10px;
+  margin-top: 10px;
 }
 
 .find-job .single-job .job-content ul {
   margin-top: 20px;
+  padding-left: 0;
 }
 
 .find-job .single-job .job-content ul li {
@@ -388,7 +390,7 @@ a:link{
 
 .find-job .single-job .job-content ul li i {
   font-size: 13px;
-  display: inline-block;
+
   margin-right: 3px;
 }
 
@@ -397,7 +399,7 @@ a:link{
 }
 
 .find-job .single-job .job-content ul li a:hover {
-  color: #2042e3;
+  color: rgb(0, 24, 97);
 }
 
 .find-job .single-job .job-button {
@@ -421,12 +423,12 @@ a:link{
 
 .find-job .single-job .job-button ul li a:hover {
   color: #fff;
-  background-color: #2042e3;
+background-color: rgb(0, 24, 97)!important;
   border-color: transparent;
 }
 span {
   padding: 5px 20px;
-  background-color: #2042e3;
+background-color: rgb(0, 24, 97)!important;
   color: #fff;
   border-radius: 4px;
   font-size: 13px;
@@ -439,6 +441,16 @@ span {
   background-color: #fff;
   border-radius: 6px;
 }
+@media (max-width: 990px) { /* Adjust the max-width as needed for your breakpoints */
+   .find-job .search-job .search-nner input{
+      margin-top: 10px;
+      
+  }
+  .find-job .search-job .search-nner button{
+    margin-top: 10px;
+    
+}
+}
 
 .find-job .search-job .search-nner input {
   height: 50px;
@@ -450,10 +462,23 @@ span {
   padding: 0px 20px;
 }
 
-.find-job .search-job .search-nner .btn {
+.find-job .search-job .search-nner .button .btn{
   width: 100%;
-}
+  padding: 0.7em 1.8em;
+  border: 2px solid rgb(0, 24, 97);
+  background-color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: inherit;
+  color: rgb(0, 24, 97);
+  cursor: pointer;
 
+}
+.find-job .search-job .search-nner .btn:hover {
+  background-color: rgb(0, 24, 97);
+  color: #ffffff;
+}
 .position-relative {
   position: relative;
 }
@@ -461,9 +486,9 @@ span {
 .status-span {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 10px;
   padding: 5px 20px;
-  background-color: #2042e3;
+background-color: rgb(0, 24, 97)!important;
   color: #fff;
   font-size: 11px;
   text-transform: capitalize;
@@ -473,5 +498,72 @@ span {
   .status-span {
       position: static;
       margin-top: 10px;
+      
   }
+}
+
+/* Pagination CSS */
+.pagination {
+  text-align: left;
+  margin: 40px 0 0 0;
+  display: block;
+}
+
+.pagination.center {
+  text-align: center;
+}
+
+.pagination.right {
+  text-align: right;
+}
+
+.pagination.left {
+  text-align: left;
+}
+
+.pagination .pagination-list {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.pagination .pagination-list li {
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.pagination .pagination-list li:last-child {
+  margin-right: 0px;
+}
+
+.pagination .pagination-list li a {
+  background: #fff;
+  color: #081828;
+  font-weight: 500;
+  font-size: 13px;
+  border-radius: 0;
+  line-height: 40px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.pagination .pagination-list li.active a,
+.pagination .pagination-list li:hover a {
+  background-color: rgb(0, 24, 97)!important;
+  color: #fff;
+  border-color: transparent;
+}
+
+.pagination .pagination-list li a i {
+  font-size: 13px;
+}
+
+.pagination-md-center {
+  text-align: center !important;
+}
+
+.text-secondary{
+  font-size: 12px;
 }

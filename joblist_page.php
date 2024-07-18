@@ -25,25 +25,26 @@
         <!-- Navbar -->
         <?php include ("navbar.php"); ?>
         <!-- End of Navbar -->
-        <!-- Start Find Job Area -->
     </div>
 
-    <section class="find-job section mt-5">
+    <section class="find-job section">
         <div class="search-job">
             <div class="container">
+                <form method="GET" action="">
                 <div class="search-nner">
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+                        <input type="text" class="form-control" name="searchInput" placeholder="Job Name" value="<?php echo isset($_GET['searchInput']) ? htmlspecialchars($_GET['searchInput']) : ''; ?>">
                         </div>
-                        <div class="col-lg-5 col-md-5 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Location: City, State, Zip">
+                        <div class="col-lg-5 col-md-4 col-xs-12">
+                        <input type="text" class="form-control" name="locDepStat" placeholder="Location, Department, Status" value="<?php echo isset($_GET['locDepStat']) ? htmlspecialchars($_GET['locDepStat']) : ''; ?>">
                         </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 button">
-                            <button type="submit" class="btn btn-common float-right">Filter</button>
+                        <div class="col-lg-2 col-md-3 col-sm-12 button">
+                            <button type="submit" class="btn col-lg-12 col-md-12 col-sm-12">Filter</button>
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="job-card-container container">
@@ -51,22 +52,30 @@
                 <div class="row d-flex justify-content-center">
                     <?php include ("php_connections/fetch_jobs_joblist_page.php"); ?>
                 </div>
-                <!-- Pagination -->
-                <div class="row ">
-                    <div class="col-12">
-                        <div class="pagination center">
-                            <ul class="pagination-list">
-                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!--/ End Pagination -->
+
+<!-- Pagination -->
+<div class="row">
+    <div class="col-12">
+        <div class="pagination center">
+            <ul class="pagination-list">
+                <?php if ($page > 1): ?>
+                    <li><a href="?page=<?php echo $page - 1; ?>"><i class="lni lni-arrow-left"></i></a></li>
+                <?php endif; ?>
+                
+                <?php for ($i = 1; $i <= ceil($totalJobs / $jobsPerPage); $i++): ?>
+                    <li class="<?php echo ($i == $page) ? 'active' : ''; ?>"><a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php endfor; ?>
+                
+                <?php if ($page < ceil($totalJobs / $jobsPerPage)): ?>
+                    <li><a href="?page=<?php echo $page + 1; ?>"><i class="lni lni-arrow-right"></i></a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /End Pagination -->
+
+
             </div>
         </div>
     </section>
