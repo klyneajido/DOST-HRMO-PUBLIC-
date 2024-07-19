@@ -32,7 +32,9 @@
                             <p>Human Resource Management Office</p>
                         </div>
                         <div class="intro-btn">
-                            <button class="btn flash-slide flash-slide--blue">Learn More</button>
+                            <button class="btn flash-slide flash-slide--blue">
+                            <a href="https://region1.dost.gov.ph/">Learn More</a>    
+                            </button>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -110,7 +112,7 @@
         </section>
     </div>
     <!-- Site footer -->
-    <?php include("footer.php")?>
+    <div id="footer"><?php include("footer.php")?></div>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

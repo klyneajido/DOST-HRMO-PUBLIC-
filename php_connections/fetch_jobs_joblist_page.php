@@ -6,7 +6,7 @@ $searchInput = isset($_GET['searchInput']) ? $_GET['searchInput'] : '';
 $locDepStat = isset($_GET['locDepStat']) ? $_GET['locDepStat'] : '';
 
 // Get the current page number
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $jobsPerPage = 6; // Number of jobs per page
 $offset = ($page - 1) * $jobsPerPage;
 
@@ -47,14 +47,14 @@ array_push($bindParams, $jobsPerPage, $offset);
 $stmt->bind_param($bindParamsTypes, ...$bindParams);
 
 $stmt->execute();
-$stmt->bind_result($job_id, $job_title,$position_or_unit, $description, $place_of_assignment, $department_name, $salary, $status, $created_at, $updated_at,$deadline);
+$stmt->bind_result($job_id, $job_title, $position_or_unit, $description, $place_of_assignment, $department_name, $salary, $status, $created_at, $updated_at, $deadline);
 
 $jobs = [];
 while ($stmt->fetch()) {
     $jobs[] = [
         'job_id' => $job_id,
         'job_title' => $job_title,
-        'position_or_unit'=> $position_or_unit,
+        'position_or_unit' => $position_or_unit,
         'description' => $description,
         'place_of_assignment' => $place_of_assignment,
         'department_name' => $department_name,
@@ -63,7 +63,7 @@ while ($stmt->fetch()) {
         'created_at' => $created_at,
         'updated_at' => $updated_at,
         'deadline' => $deadline
-     ];
+    ];
 }
 $stmt->close();
 
@@ -102,31 +102,39 @@ if (count($jobs) > 0) {
         if ($counter % 2 == 0 && $counter != 0) {
             echo '</div><div class="row">';
         }
-?>
-<div class="col-lg-6 col-md-12 pt-2 ">
-    <!-- Single Job -->
-    <div class="single-job ">
-        <div class="job-content">
-            <div class="job-title row d-flex justify-content-between  ">
-                <h4 class="col-lg-9 col-md-9 col-sm-9 "><a href="job_description.php?job_id=<?php echo $job['job_id']; ?>"><?php echo htmlspecialchars($job['job_title'])?> <?php echo htmlspecialchars($job['position_or_unit'])?></a></h4>
-                <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
-                    <span class="status-span"><?php echo htmlspecialchars($job['status'])?></span>
+        ?>
+
+        <div class="col-lg-6 col-md-12 pt-2 ">
+            <!-- Single Job -->
+            <a href="job_description.php?job_id=<?php echo $job['job_id']; ?>">
+                <div class="single-job ">
+                    <div class="job-content">
+                        <div class="job-title row d-flex justify-content-between  ">
+                            <h4 class="col-lg-9 col-md-9 col-sm-9 "><?php echo htmlspecialchars($job['job_title']) ?>
+                                <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
+                            <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
+                                <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
+                            </div>
+                        </div>
+
+                        <ul>
+                            <li><i class="lni lni-website"></i><a
+                                    href="#"><?php echo htmlspecialchars($job['department_name']) ?></a></li>
+                            <li><i
+                                    class="lni lni-dollar"></i>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary'])) ?>
+                            </li>
+                            <li><i class="lni lni-map-marker"></i><?php echo htmlspecialchars($job['place_of_assignment']) ?>
+                            </li>
+                        </ul>
+                        <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
+                        <p class="text-secondary">• Deadline: <?php echo htmlspecialchars(time_ago($job['deadline'])) ?></p>
+                    </div> 
                 </div>
-            </div>
-            
-            <ul>
-                <li><i class="lni lni-website"></i><a href="#"><?php echo htmlspecialchars($job['department_name'])?></a></li>
-                <li><i class="lni lni-dollar"></i>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary']))?></li>
-                <li><i class="lni lni-map-marker"></i><?php echo htmlspecialchars($job['place_of_assignment'])?></li>
-            </ul>
-            <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at']))?></p>
-            <p class="text-secondary">• Deadline: <?php echo htmlspecialchars(time_ago($job['deadline']))?></p>
+            </a>
+            <!-- End Single Job -->
         </div>
-    </div>
-    <!-- End Single Job -->
-</div>
-<!--end col-->
-<?php
+        <!--end col-->
+        <?php
         $counter++;
     }
     echo '</div>';
@@ -134,7 +142,6 @@ if (count($jobs) > 0) {
     // If no rows found
     echo "No jobs found.";
 }
-
 // Function to display time ago
 function time_ago($timestamp)
 {
@@ -170,17 +177,18 @@ function time_ago($timestamp)
     }
 }
 
-function thousandsCurrencyFormat($num) {
-    if($num>1000) {
-          $x = round($num);
-          $x_number_format = number_format($x);
-          $x_array = explode(',', $x_number_format);
-          $x_parts = array('k', 'm', 'b', 't');
-          $x_count_parts = count($x_array) - 1;
-          $x_display = $x;
-          $x_display = $x_array[0] . ((int) $x_array[1][0] !== 0 ? '.' . $x_array[1][0] : '');
-          $x_display .= $x_parts[$x_count_parts - 1];
-          return $x_display;
+function thousandsCurrencyFormat($num)
+{
+    if ($num > 1000) {
+        $x = round($num);
+        $x_number_format = number_format($x);
+        $x_array = explode(',', $x_number_format);
+        $x_parts = array('k', 'm', 'b', 't');
+        $x_count_parts = count($x_array) - 1;
+        $x_display = $x;
+        $x_display = $x_array[0] . ((int) $x_array[1][0] !== 0 ? '.' . $x_array[1][0] : '');
+        $x_display .= $x_parts[$x_count_parts - 1];
+        return $x_display;
     }
     return $num;
 }

@@ -10,24 +10,21 @@
 <footer class="site-footer">
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-9 col-sm-12">
       <h6>About</h6>
       <p class="text-justify">Welcome to the DOST HRMO Region 1 Job Application Portal, designed to streamline your application process for job opportunities within the Department of Science and Technology Region 1. Explore various job openings, submit your applications online, and stay updated on your application status with ease. Join us in driving scientific and technological advancements in Region 1. We are committed to a fair, transparent, and accessible hiring process, promoting diversity, and supporting your professional growth. Thank you for considering a career with us.</p>
     </div>
-    <div class="col-md-6 col-sm-12">
-      <h6>Quick Links</h6>
+    <div class="col-md-3 col-sm-12">
+      <h6>Contact us</h6>
       <ul class="footer-links">
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-        <li><a href="">Contribute</a></li>
-        <li><a href="/">Privacy Policy</a></li>
-        <li><a href="">Sitemap</a></li>
+        <li><i class="fa-solid fa-phone"></i> (072) 888 3399 | 0917-840-8695</li>
+        <li><i class="fa-solid fa-envelope"></i> mail@region1.dost.gov.ph | hr@region1.dost.gov.ph</li>
+        <li><a href="https://www.google.com/maps/place/Department+of+Science+and+Technology+-+Region+1+Ilocos-Pangasinan+Region/@16.6080417,120.3140603,17.75z/data=!4m6!3m5!1s0x33918e468c3dcb0d:0x32a8734baef8ee29!8m2!3d16.6079706!4d120.3157926!16s%2Fg%2F1hc53540h?entry=ttu"><i class="fa-solid fa-map-pin"></i> Sitemap</a></li>
       </ul>
     </div>
   </div>
   <hr>
 </div>
-
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-sm-6 col-xs-12">

@@ -52,3 +52,7 @@ body {
 .red-asterisk {
   color: red;
 }
+input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus,input[type=file]:focus{
+  background-color: lightblue !important;
+}
+
