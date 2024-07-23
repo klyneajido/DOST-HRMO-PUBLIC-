@@ -35,8 +35,12 @@ while ($stmt->fetch()) {
    
     <?php
 }
-if (!$rowsFetched) {
-    echo "<p>No announcements found.</p>";
+if (!$rowsFetched) {?>
+ <div class="slider-card">
+        <h5 class="p-2 text-center"><b>No Announcements Available</b></h5>
+        <p class="text-center p-3">Sorry, there are no announcements to display at this time.</p>
+    </div>
+    <?php
 }
 
 $stmt->close();

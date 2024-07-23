@@ -126,7 +126,7 @@ if (count($jobs) > 0) {
                     </li>
                 </ul>
                 <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
-                <p class="text-secondary">• Deadline: <?php echo htmlspecialchars(time_ago($job['deadline'])) ?></p>
+                <p class="text-secondary">• Due: <?php echo htmlspecialchars(formatDate($job['deadline'])) ?></p>
             </div>
         </div>
     </a>
@@ -138,10 +138,26 @@ if (count($jobs) > 0) {
     }
     echo '</div>';
 } else {
-    // If no rows found
-    echo "No jobs found.";
+    ?>
+<div class="col-12 d-flex justify-content-center mt-4 pt-2">
+        <div class="card border-0 bg-light rounded shadow">
+            <div class="card-body p-4 text-center">
+                <h6>No Job Opportunities Available</h6>
+                <p class="text-muted mb-0">Currently, there are no job postings. Please check back later for new opportunities.</p>
+            </div>
+        </div>
+    </div><!--end col-->
+<?php
 }
+?>
+<?php
 // Function to display time ago
+
+// Function to format the date
+function formatDate($date) {
+    return date("F j, Y", strtotime($date)); // Adjust format as needed
+}
+
 function time_ago($timestamp)
 {
     $current_time = time();

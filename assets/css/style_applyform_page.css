@@ -56,3 +56,6 @@ input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus,input[typ
   background-color: lightblue !important;
 }
 
+.submit-button {
+ background-color: rgb(0, 24, 97) !important;
+} 

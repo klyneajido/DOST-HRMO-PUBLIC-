@@ -6,12 +6,19 @@ function formatDate($date) {
     return date("F j, Y", strtotime($date));
 }
 
+// Function to check if the deadline has passed
+function hasDeadlinePassed($deadline) {
+    $deadlineTimestamp = strtotime($deadline . ' 17:00:00'); // Deadline at 5:00 PM
+    $currentTimestamp = time();
+    return $currentTimestamp > $deadlineTimestamp;
+}
+
 // Get the job ID from the URL and validate it
 $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
 
 if ($job_id > 0) {
     // SQL query to fetch job details based on job ID
-    $sql = "SELECT job.job_title, department.name AS department_name, job.place_of_assignment, job.salary, job.status, job.description, job.deadline, job.created_at
+    $sql = "SELECT job.job_title, job.position_or_unit, department.name AS department_name, job.place_of_assignment, job.salary, job.status, job.description, job.deadline, job.created_at
             FROM job 
             JOIN department ON job.department_id = department.department_id
             WHERE job.job_id = ?";
@@ -19,9 +26,12 @@ if ($job_id > 0) {
     if ($stmt) {
         $stmt->bind_param("i", $job_id);
         $stmt->execute();
-        $stmt->bind_result($job_title, $department_name, $place_of_assignment, $salary, $status, $description, $deadline, $created_at);
+        $stmt->bind_result($job_title, $position_or_unit, $department_name, $place_of_assignment, $salary, $status, $description, $deadline, $created_at);
         $stmt->fetch();
         $stmt->close();
+
+        // Check if the deadline has passed
+        $deadlinePassed = hasDeadlinePassed($deadline);
     } else {
         // Handle query preparation error
         die("Error preparing query: " . $conn->error);

@@ -46,75 +46,69 @@ body {
 }
 
 /* Job Description */
-#job-title{
+#title{
     margin-top: 150px;
     margin-bottom: 40px;
 }
 
-.heading {
-  text-align: center;
-  margin-bottom: 40px;
+.header {
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 40px;
+
 }
-.heading:after {
+.header:after {
   content: " ";
   display: block;
-  width: 100px;
-  height: 2px;
   margin: 20px auto 20px;
-  background: #063ac9;
+  width: 200px;
+  height: 2px;
+  background: rgb(0, 24, 97);
 }
-#job-title p{
+#title p{
   color: #4460ae;
 }
 
-.job-detail-description {
+.header-description {
+  color: #868e96;
+  font-size: 0.9rem;
+  margin-bottom:0px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  color: #868e96;
-  font-size: 0.9rem;
-  margin-bottom:0px;
 }
-.job-detail-description .badge .featured-badge .badge-info{
+.header-description .badge .featured-badge .badge-info{
   background-color: #063ac9;
 }
-.heading small {
+.header small {
   font-size: 1.4rem;
 }
-/*======================================
-    Job Details CSS
-========================================*/
-.job-details {
+
+.info-job {
   background-color: #f6f9fc;
 }
 
-.job-details .job-details-inner {
+.info-job .info-job-2 {
   padding: 40px;
-  border-radius: 6px;
-  border: 1px solid #eee;
+  border-radius: 5px;
   background-color: #fff;
 }
 
-.job-details .job-details-head {
+.info-job .job-details-head {
   margin-bottom: 30px;
   position: relative;
-  z-index: 1;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 25px;
+  z-index: 1;
   border-bottom: 1px solid #EDEDED;
 }
 
-.job-details .job-details-head .content .meta {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
+.info-job .job-details-head .content .meta {
   flex-wrap: wrap;
   margin-bottom: 0;
   padding-left: 0;
@@ -122,21 +116,23 @@ body {
   color: #7E8890;
   display: block;
   margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+ 
 }
 
-.job-details .job-details-head .salary-type .salary-range {
-  font-weight: 500;
-  line-height: 1;
+.info-job .job-details-head .salary-type .salary-range {
   display: block;
   margin-bottom: 8px;
   color: #7E8890;
+  font-weight: 500;
+  line-height: 1;
 }
 
-.job-details .job-details-head .badge {
+.info-job .job-details-head .badge {
   display: inline-block;
-  font-size: 12px;
-  margin-bottom: 5px;
-  margin-right: 3px;
   position: relative;
   background: #2042e314;
   color: #2042e3;
@@ -145,50 +141,53 @@ body {
   font-weight: 400;
   display: inline-block;
   margin-top: 5px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-right: 3px;
 }
 
-.job-details .job-details-head li {
+.info-job .job-details-head li {
   display: inline-block;
   margin-right: 15px;
 }
 
-.job-details .job-details-head li i {
+.info-job .job-details-head li i {
   color: #2042e3;
 }
 
-.job-details .job-details-head li:last-child {
+.info-job .job-details-head li:last-child {
   margin-right: 0;
 }
 
-.job-details .job-details-head li a {
+.info-job .job-details-head li a {
   color: #2042e3;
   font-weight: 500;
 }
 
-.job-details .job-details-head li a:hover {
+.info-job .job-details-head li a:hover {
   text-decoration: underline;
 }
 
-.job-details .job-details-body h6 {
+.info-job .info-job-body h6 {
   font-size: 20px;
 }
 
-.job-details .job-details-body p {
+.info-job .info-job-body p {
   margin: 20px 0;
 }
 
-.job-details .job-details-body ul {
+.info-job .info-job-body ul {
   margin-left: 10px;
 }
 
-.job-details .job-details-body ul li {
+.info-job .info-job-body ul li {
   display: block;
   margin-bottom: 8px;
   position: relative;
   padding-left: 15px;
 }
 
-.job-details .job-details-body ul li::before {
+.info-job .info-job-body ul li::before {
   position: absolute;
   content: "";
   left: 0;
@@ -197,14 +196,14 @@ body {
   width: 6px;
   display: block;
   border-radius: 50%;
-  background-color: #2042e3;
+  background-color: rgb(0, 24, 97) !important;
 }
 
-.job-details .job-details-body ul li:last-child {
+.info-job .info-job-body ul li:last-child {
   margin-bottom: 0;
 }
 
-.job-details .job-details-sidebar .sidebar-widget {
+.info-job .sidebar .sidebar-body{
   padding: 40px;
   border-radius: 6px;
   border: 1px solid #eee;
@@ -212,82 +211,56 @@ body {
   margin-bottom: 30px;
 }
 
-.job-details .job-details-sidebar .sidebar-widget:last-child {
+.info-job .sidebar .sidebar-body:last-child {
   margin-bottom: 0;
 }
 
-.job-details .job-details-sidebar .sidebar-widget .title {
+.info-job .sidebar .sidebar-body.title {
+  font-weight: 500;
+  line-height: 28px;
   font-size: 18px;
   margin-bottom: 20px;
   line-height: 1;
   position: relative;
-  padding-left: 18px;
-  font-weight: 600;
-  line-height: 28px;
-  text-transform: capitalize;
 }
 
-.job-details .job-details-sidebar .sidebar-widget .title::before {
-  position: absolute;
-  left: 0;
-  top: 1px;
-  height: 100%;
-  width: 3px;
-  background-color: #2042e3;
-  content: '';
-}
-
-.job-details .job-details-sidebar .sidebar-widget .list-unstyled li {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.job-details .job-details-sidebar .sidebar-widget .list-unstyled li strong {
-  color: #081828;
-  font-weight: 600;
-  display: inline-block;
-  margin-right: 2px;
-}
-
-.job-details .job-details-sidebar .sidebar-widget .list-unstyled li:last-child {
-  margin-bottom: 0;
-}
-.job-details .job-details-inner {
+.info-job .info-job-2 {
   padding: 30px !important;
 }
-.job-details .job-details-inner {
+.info-job .info-job-2 {
   padding: 40px;
   border-radius: 6px;
   border: 1px solid #eee;
   background-color: #fff;
 }
 
-.job-details .content {
+.info-job .content {
   padding: 0 !important;
   display: block;
   -webkit-box-flex: 1;
       -ms-flex: auto;
           flex: auto;
 }
-.job-details .company-logo {
+.info-job .company-logo {
   padding-left: 0 !important;
 }
-.job-details .title {
+.info-job .title {
   display: block;
   margin-top: 10px;
 }
-.job-details .job-details-head .salary-type {
+.info-job .job-details-head .salary-type {
   -webkit-box-ordinal-group: 1 !important;
       -ms-flex-order: 0 !important;
           order: 0 !important;
 }
-.job-details .job-details-sidebar .sidebar-widget:first-child {
+.info-job .sidebar .sidebar-body:first-child {
   margin-top: 30px !important;
 }
-.job-details .job-details-inner {
+.info-job .info-job-2 {
   margin-top: 30px !important;
 }
-.job-details button {
+.info-job button {
+  width: 200px;/* Ensure any pseudo-elements are positioned relative to the button */
   padding: 0.8em 1.8em;
   border: 2px solid rgb(0, 24, 97);
   background-color: transparent;
@@ -299,42 +272,16 @@ body {
   color: rgb(0, 24, 97);
   cursor: pointer;
   position: relative;
-  width: 200px;/* Ensure any pseudo-elements are positioned relative to the button */
-}
 
+}
+.apply-button:hover{
+  background-color: rgb(0, 24, 97) !important;
+}
 button:hover {
   background-color: rgb(0, 24, 97);
   color: #ffffff;
 }
 
-.more-jobs .bg-primary,
-.btn-primary,
-.btn-outline-primary:hover,
-.btn-outline-primary:focus,
-.btn-outline-primary:active,
-.btn-outline-primary.active,
-.btn-outline-primary.focus,
-.btn-outline-primary:not(:disabled):not(.disabled):active,
-.badge-primary,
-.nav-pills .nav-link.active,
-.pagination .active a,
-.custom-control-input:checked ~ .custom-control-label:before,
-#preloader #status .spinner > div,
-.social-icon li a:hover,
-.back-to-top:hover,
-.back-to-home a,
-::selection,
-#topnav .navbar-toggle.open span:hover,
-.owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots.clickable .owl-dot:hover span,
-.watch-video a .play-icon-circle,
-.sidebar .widget .tagcloud > a:hover,
-.flatpickr-day.selected,
-.flatpickr-day.selected:hover,
-.tns-nav button.tns-nav-active,
-.form-check-input.form-check-input:checked {
-  background-color: rgb(0, 24, 97)!important;
-}
 
 .more-jobs .badge {
   padding: 5px 8px;
@@ -344,66 +291,6 @@ button:hover {
 }
 
 
-.more-jobs .btn-primary,
-.btn-outline-primary,
-.btn-outline-primary:hover,
-.btn-outline-primary:focus,
-.btn-outline-primary:active,
-.btn-outline-primary.active,
-.btn-outline-primary.focus,
-.btn-outline-primary:not(:disabled):not(.disabled):active,
-.bg-soft-primary .border,
-.alert-primary,
-.alert-outline-primary,
-.badge-outline-primary,
-.nav-pills .nav-link.active,
-.pagination .active a,
-.form-group .form-control:focus,
-.form-group .form-control.active,
-.custom-control-input:checked ~ .custom-control-label:before,
-.custom-control-input:focus ~ .custom-control-label::before,
-.form-control:focus,
-.social-icon li a:hover,
-#topnav .has-submenu.active.active .menu-arrow,
-#topnav.scroll .navigation-menu > li:hover > .menu-arrow,
-#topnav.scroll .navigation-menu > li.active > .menu-arrow,
-#topnav .navigation-menu > li:hover > .menu-arrow,
-.flatpickr-day.selected,
-.flatpickr-day.selected:hover,
-.form-check-input:focus,
-.form-check-input.form-check-input:checked,
-.container-filter li.active,
-.container-filter li:hover {
-  background-color: rgb(0, 24, 97)!important;
-}
-.more-jobs .bg-primary,
-.btn-primary,
-.btn-outline-primary:hover,
-.btn-outline-primary:focus,
-.btn-outline-primary:active,
-.btn-outline-primary.active,
-.btn-outline-primary.focus,
-.btn-outline-primary:not(:disabled):not(.disabled):active,
-.badge-primary,
-.nav-pills .nav-link.active,
-.pagination .active a,
-.custom-control-input:checked ~ .custom-control-label:before,
-#preloader #status .spinner > div,
-.social-icon li a:hover,
-.back-to-top:hover,
-.back-to-home a,
-::selection,
-#topnav .navbar-toggle.open span:hover,
-.owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots.clickable .owl-dot:hover span,
-.watch-video a .play-icon-circle,
-.sidebar .widget .tagcloud > a:hover,
-.flatpickr-day.selected,
-.flatpickr-day.selected:hover,
-.tns-nav button.tns-nav-active,
-.form-check-input.form-check-input:checked {
-  background-color: rgb(0, 24, 97)!important;
-}
 .more-jobs .btn {
   padding: 8px 20px;
   outline: none;
@@ -417,9 +304,16 @@ button:hover {
 .more-jobs .btn-primary {
   background-color: rgb(0, 24, 97) !important;
   color: #fff !important;
-  box-shadow: 0 3px 7px rgb(109 199 122 / 50%);
 }
 
 .more-jobs a {
   text-decoration: none;
+}
+
+.badge-info{
+  background-color: rgb(0, 24, 97) !important;
+}
+
+.indented{
+  text-indent: 50px;
 }

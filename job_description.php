@@ -10,7 +10,6 @@
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
     <link rel="icon" type="image/png" href="assets/img/dost_logo.png">
     <link rel="stylesheet" type="text/css" href="assets/css/style_jobdescription_page.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/style.default.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
@@ -32,30 +31,29 @@
         </div>
     </div>
 
-    <section id="job-title">
+    <section id="title">
         <div class="container">
-            <h1 class="heading"><?php echo htmlspecialchars($job_title) ?><br><small>of
+            <h1 class="header"><?php echo htmlspecialchars($job_title) ?>
+                <?php echo htmlspecialchars($position_or_unit) ?><br><small>of
                     <?php echo htmlspecialchars($department_name) ?></small></h1>
-            <div class="job-detail-description"><i class="fa fa-map-marker job__location">
-                </i><?php echo htmlspecialchars($place_of_assignment) ?>
+            <div class="header-description"><?php echo htmlspecialchars($place_of_assignment) ?>
                 | Posted on <?php echo htmlspecialchars(formatDate($deadline)) ?> |<span
                     class="badge featured-badge badge-info"><?php echo htmlspecialchars($status) ?></span>
             </div>
         </div>
     </section>
-    <!-- Start Job Details -->
-    <div class="job-details section pb-5">
+    <div class="info-job section pb-4">
         <div class="container">
             <div class="row mb-n5">
                 <!-- Job List Details Start -->
                 <div class="col-lg-8 col-12">
-                    <div class="job-details-inner">
-                        <div class="job-details-body">
-                            <h6 class="mb-3">About this Role</h6>
+                    <div class="info-job-2">
+                        <div class="info-job-body">
+                            <h6 class="mb-3"><strong>About this Role</strong></h6>
                             <p><?php echo htmlspecialchars($description)?></p>
-                            <h6 class="mb-3 mt-4">CSC Minimum Qualifications</h6>
+                            <h6 class="mb-3 mt-4"><strong>CSC Minimum Qualifications</strong></h6>
                             <ul>
-                                <li>Education</li>
+                                <strong>Education</strong>
                                 <ul>
                                     <?php if (!empty($requirements['education'])): ?>
                                     <?php foreach ($requirements['education'] as $requirement): ?>
@@ -65,7 +63,7 @@
                                     <li>No educational requirements listed.</li>
                                     <?php endif; ?>
                                 </ul>
-                                <li>Experience + Training</li>
+                                <strong>Experience and Training</strong>
                                 <ul>
                                     <?php if (!empty($requirements['experience'])): ?>
                                     <?php foreach ($requirements['experience'] as $requirement): ?>
@@ -77,7 +75,7 @@
                                 </ul>
 
                             </ul>
-                            <h6 class="mb-3 mt-4">Responsibilities</h6>
+                            <h6 class="mb-3 mt-4"><strong>Responsibilities</strong></h6>
                             <ul>
                                 <?php if (!empty($requirements['duties'])): ?>
                                 <?php foreach ($requirements['duties'] as $requirement): ?>
@@ -94,34 +92,38 @@
 
                 <!-- Job Sidebar Wrap Start -->
                 <div class="col-lg-4 col-12">
-                    <div class="job-details-sidebar">
+                    <div class="sidebar">
                         <!-- Sidebar (Apply Buttons) Start -->
-                        <div class="sidebar-widget">
-                            <div class="inner">
+                        <div class="sidebar-body">
+                            <div class="content">
                                 <div class="row justify-content-center button">
                                     <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2 ">
+                                        <?php if ($deadlinePassed): ?>
+                                        <!-- Deadline has passed, button is disabled -->
+                                        <button class="btn btn-secondary" disabled>Apply</button>
+                                        <?php else: ?>
+                                        <!-- Deadline has not passed, button is enabled -->
                                         <a href="apply_page.php?job_id=<?php echo $job_id; ?>"
-                                            class="d-block text-center px-4 ">
-                                            <button class=""> Apply
-                                            </button></a>
+                                            class="d-block text-center px-4">
+                                            <button class="apply-button btn btn-primary">Apply</button>
+                                        </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Sidebar (Apply Buttons) End -->
-                        <!-- Sidebar (Job Overview) Start -->
-                        <div class="sidebar-widget">
-                            <div class="inner">
-                                <h6 class="title">Job Overview</h6>
-                                <ul class="job-overview list-unstyled">
-                                    <li><strong>Deadline:</strong> <?php echo htmlspecialchars(formatDate($deadline))?>
-                                    </li>
-                                    <li><strong>Employment Status:</strong><?php echo htmlspecialchars($status)?></li>
-                                    <li><strong>Job
-                                            Location:</strong><?php echo htmlspecialchars($place_of_assignment)?></li>
-                                    <li><strong>Salary:</strong>₱<?php echo htmlspecialchars(number_format($salary,2))?>
-                                    </li>
-                                </ul>
+
+                        <div class="sidebar-body">
+                            <div class="content">
+                                <h6 class="overview-title mb-4"><strong>Job Overview</strong></h6>
+                                <div class="mb-2"><strong>Deadline:</strong>
+                                    <?php echo htmlspecialchars(formatDate($deadline))?>, 5:00 PM</div>
+                                <div class="mb-2"><strong>Employment Status:</strong>
+                                    <?php echo htmlspecialchars($status)?></div>
+                                <div class="mb-2"><strong>Job Location:</strong>
+                                    <?php echo htmlspecialchars($place_of_assignment)?></div>
+                                <div class="mb-2"><strong>Salary:</strong>
+                                    ₱<?php echo htmlspecialchars(number_format($salary,2))?></div>
                             </div>
                         </div>
                         <!-- Sidebar (Job Overview) End -->

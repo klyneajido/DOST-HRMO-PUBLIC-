@@ -223,7 +223,7 @@
                         <div class="invalid-feedback">Invalid</div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <button type="submit" class="submit-button btn btn-primary">Submit Application</button>
                 </form>
             </div>
 
