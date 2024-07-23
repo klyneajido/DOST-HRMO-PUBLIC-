@@ -119,7 +119,16 @@ a:link{
   transition: all 0.4s ease;
   background-color: #fff;
 }
+.card-a a {
+  color: black;
+  text-decoration: none;
+}
 
+.card-a  a:hover {
+  color:#00A0C6; 
+  text-decoration:none; 
+  cursor:pointer;  
+}
 .find-job .single-job:hover {
   -webkit-box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
           box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
@@ -148,6 +157,7 @@ a:link{
   font-size: 18px;
   font-weight: 500;
   color: #081828;
+
 }
 
 .find-job .single-job .job-content h4 a:hover {
@@ -296,17 +306,13 @@ background-color: rgb(0, 24, 97)!important;
       
   }
 }
-
+.card-a{
+  text-decoration: none;
+}
 /* Pagination CSS */
 .pagination {
   text-align: left;
   margin: 40px 0 0 0;
-}
-
-.pagination .pagination-list {
-
-
-  border: 1px solid red;
 }
 
 .pagination .pagination-list li {

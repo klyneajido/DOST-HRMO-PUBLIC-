@@ -39,6 +39,7 @@
                 <form method="post" id="form" autocomplete="off" class="row g-3 needs-validation"
                     action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?job_id=" . $job_id); ?>"
                     enctype="multipart/form-data" novalidate>
+                    
                     <div class="col-md-4">
                         <label for="lastname" class="form-label">Lastname<span class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="lastname" id="lastname" required>

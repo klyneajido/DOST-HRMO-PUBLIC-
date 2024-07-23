@@ -78,14 +78,8 @@ body {
   font-size: 0.9rem;
   margin-bottom:0px;
 }
-
-.job-detail-description {
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  color: #868e96;
-  font-size: 0.9rem;
+.job-detail-description .badge .featured-badge .badge-info{
+  background-color: #063ac9;
 }
 .heading small {
   font-size: 1.4rem;

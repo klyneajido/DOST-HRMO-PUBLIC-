@@ -38,8 +38,8 @@
                     <?php echo htmlspecialchars($department_name) ?></small></h1>
             <div class="job-detail-description"><i class="fa fa-map-marker job__location">
                 </i><?php echo htmlspecialchars($place_of_assignment) ?>
-                | <?php echo htmlspecialchars(formatDate($deadline)) ?> |<span
-                    class="badge featured-badge badge-success"><?php echo htmlspecialchars($status) ?></span>
+                | Posted on <?php echo htmlspecialchars(formatDate($deadline)) ?> |<span
+                    class="badge featured-badge badge-info"><?php echo htmlspecialchars($status) ?></span>
             </div>
         </div>
     </section>
@@ -56,21 +56,36 @@
                             <h6 class="mb-3 mt-4">CSC Minimum Qualifications</h6>
                             <ul>
                                 <li>Education</li>
+                                <ul>
+                                    <?php if (!empty($requirements['education'])): ?>
+                                    <?php foreach ($requirements['education'] as $requirement): ?>
+                                    <li><?php echo htmlspecialchars($requirement); ?></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <li>No educational requirements listed.</li>
+                                    <?php endif; ?>
+                                </ul>
                                 <li>Experience + Training</li>
+                                <ul>
+                                    <?php if (!empty($requirements['experience'])): ?>
+                                    <?php foreach ($requirements['experience'] as $requirement): ?>
+                                    <li><?php echo htmlspecialchars($requirement); ?></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <li>No experience or training requirements listed.</li>
+                                    <?php endif; ?>
+                                </ul>
+
                             </ul>
                             <h6 class="mb-3 mt-4">Responsibilities</h6>
                             <ul>
-                                <li>Proven work experienceas a web designer</li>
-                                <li>Demonstrable graphic design skills with a strong portfolio</li>
-                                <li>Proficiency in HTML, CSS and JavaScript for rapid prototyping</li>
-                                <li>Experience working in an Agile/Scrum development process</li>
-                                <li>Proven work experienceas a web designer</li>
-                                <li>Excellent visual design skills with sensitivity to user-system interaction</li>
-                                <li>Ability to solve problems creatively and effectively</li>
-                                <li>Proven work experienceas a web designer</li>
-                                <li>Up-to-date with the latest Web trends, techniques and technologies</li>
-                                <li>BS/MS in Human-Computer Interaction, Interaction Design or a Visual Arts subject
-                                </li>
+                                <?php if (!empty($requirements['duties'])): ?>
+                                <?php foreach ($requirements['duties'] as $requirement): ?>
+                                <li><?php echo htmlspecialchars($requirement); ?></li>
+                                <?php endforeach; ?>
+                                <?php else: ?>
+                                <li>No duties and responsibilities listed.</li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>

@@ -1,16 +1,16 @@
 <?php
 session_start();
-include_once 'php_connections/db_connection.php';
-
-// Define session variables
-if (!isset($_SESSION['applications'])) {
-    $_SESSION['applications'] = array();
-}
+include_once 'PHP_Connections/db_connection.php';
 
 // Function to check if user has exceeded the daily application limit
 function hasExceededApplicationLimit() {
-    $maxApplicationsPerDay = 1;
+    $maxApplicationsPerDay = 3;
     $currentTime = time();
+
+    // Initialize session variable if not set
+    if (!isset($_SESSION['applications'])) {
+        $_SESSION['applications'] = [];
+    }
 
     $_SESSION['applications'] = array_filter($_SESSION['applications'], function($timestamp) use ($currentTime) {
         return ($currentTime - $timestamp) < 86400;
@@ -46,7 +46,9 @@ function getFileContent($file) {
 }
 
 // Get the job ID from the URL and validate it
-$job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 0;
+$job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 17;
+$job_title = '';
+$position_or_unit = '';
 
 if ($job_id > 0) {
     $sql = "SELECT job_title, position_or_unit FROM job WHERE job_id = ?";
@@ -55,9 +57,7 @@ if ($job_id > 0) {
         $stmt->bind_param("i", $job_id);
         $stmt->execute();
         $stmt->bind_result($job_title, $position_or_unit);
-        if ($stmt->fetch()) {
-            // Proceed with form processing
-        } else {
+        if (!$stmt->fetch()) {
             die("Job not found.");
         }
         $stmt->close();
@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hours_of_training = htmlspecialchars($_POST['hours_of_training']);
     $eligibility = htmlspecialchars($_POST['eligibility']);
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
+    $status = "Shortlisted";
 
     // Get file contents, handle optional files
     $application_letter = isset($_FILES['application_letter']) ? getFileContent($_FILES['application_letter']) : null;
@@ -97,15 +98,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $proof_of_rewards = isset($_FILES['awards']) ? getFileContent($_FILES['awards']) : null;
 
     // Prepare SQL statement using a prepared statement
-    $sql = "INSERT INTO applicants (lastname, firstname, middlename, sex, address, email, contact_number, course, years_of_experience, hours_of_training, eligibility, list_of_awards, application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_trainings_seminars, proof_of_rewards, job_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO applicants (
+        job_title, position_or_unit, lastname, firstname, middlename, sex, address, email, contact_number, course, years_of_experience, hours_of_training, eligibility, list_of_awards, status, 
+        application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_trainings_seminars, proof_of_rewards, 
+        job_id, application_date
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";
+
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         // Bind parameters securely
-        $stmt->bind_param("ssssssssssssssssssssi", $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $course, $years_of_experience, $hours_of_training, $eligibility, $list_of_awards, $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_trainings_seminars, $proof_of_rewards, $job_id);
+        $stmt->bind_param(
+            "ssssssssssssssssssssssbi", // Adjusted to match the number of parameters and types
+            $job_title, $position_or_unit, $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $course, $years_of_experience, $hours_of_training, $eligibility, $list_of_awards, $status,
+            $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_trainings_seminars, $proof_of_rewards, $job_id
+        );
+    
 
         // Execute the statement
         if ($stmt->execute()) {
+            // Log the application timestamp
+            $_SESSION['applications'][] = time();
             echo "Application submitted successfully.";
         } else {
             echo "Error: " . $stmt->error;

@@ -65,6 +65,10 @@ body {
   background-color: rgb(0, 24, 97);
   z-index: 1;
 }
+#intro .intro-btn .btn a{
+text-decoration: none;
+color: white;
+}
 #intro .intro-btn .btn:hover .btn-slide-show-text1 {
   margin-left: 65px;
 }

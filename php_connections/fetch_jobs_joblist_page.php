@@ -104,37 +104,36 @@ if (count($jobs) > 0) {
         }
         ?>
 
-        <div class="col-lg-6 col-md-12 pt-2 ">
-            <!-- Single Job -->
-            <a href="job_description.php?job_id=<?php echo $job['job_id']; ?>">
-                <div class="single-job ">
-                    <div class="job-content">
-                        <div class="job-title row d-flex justify-content-between  ">
-                            <h4 class="col-lg-9 col-md-9 col-sm-9 "><?php echo htmlspecialchars($job['job_title']) ?>
-                                <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
-                            <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
-                                <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
-                            </div>
-                        </div>
-
-                        <ul>
-                            <li><i class="lni lni-website"></i><a
-                                    href="#"><?php echo htmlspecialchars($job['department_name']) ?></a></li>
-                            <li><i
-                                    class="lni lni-dollar"></i>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary'])) ?>
-                            </li>
-                            <li><i class="lni lni-map-marker"></i><?php echo htmlspecialchars($job['place_of_assignment']) ?>
-                            </li>
-                        </ul>
-                        <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
-                        <p class="text-secondary">• Deadline: <?php echo htmlspecialchars(time_ago($job['deadline'])) ?></p>
-                    </div> 
+<div class="col-lg-6 col-md-12 pt-2 card-a">
+    <!-- Single Job -->
+    <a class="" href="job_description.php?job_id=<?php echo $job['job_id']; ?>">
+        <div class="single-job ">
+            <div class="job-content">
+                <div class="job-title row d-flex justify-content-between  ">
+                    <h4 class="col-lg-9 col-md-9 col-sm-9 "><?php echo htmlspecialchars($job['job_title']) ?>
+                        <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
+                    <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
+                        <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
+                    </div>
                 </div>
-            </a>
-            <!-- End Single Job -->
+
+                <ul>
+                    <li>
+                        <?php echo htmlspecialchars($job['department_name']) ?></li>
+                    <li>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary'])) ?>
+                    </li>
+                    <li><?php echo htmlspecialchars($job['place_of_assignment']) ?>
+                    </li>
+                </ul>
+                <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
+                <p class="text-secondary">• Deadline: <?php echo htmlspecialchars(time_ago($job['deadline'])) ?></p>
+            </div>
         </div>
-        <!--end col-->
-        <?php
+    </a>
+    <!-- End Single Job -->
+</div>
+<!--end col-->
+<?php
         $counter++;
     }
     echo '</div>';
