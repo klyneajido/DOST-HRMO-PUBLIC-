@@ -19,7 +19,7 @@
       <ul class="footer-links">
         <li class="mb-2"><i class="fa-solid fa-phone"></i> (072) 888 3399 | 0917-840-8695</li>
         <li class="mb-2"><i class="fa-solid fa-envelope"></i> mail@region1.dost.gov.ph | hr@region1.dost.gov.ph</li>
-        <li class="mb-2"><a href="https://www.google.com/maps/place/Department+of+Science+and+Technology+-+Region+1+Ilocos-Pangasinan+Region/@16.6080417,120.3140603,17.75z/data=!4m6!3m5!1s0x33918e468c3dcb0d:0x32a8734baef8ee29!8m2!3d16.6079706!4d120.3157926!16s%2Fg%2F1hc53540h?entry=ttu" target="_blank"><i class="fa-solid fa-map-pin"></i> Sitemap</a></li>
+        <li class="mb-2"><a href="https://www.google.com/maps/place/Department+of+Science+and+Technology+-+Region+1+Ilocos-Pangasinan+Region/@16.6080417,120.3140603,17.75z/data=!4m6!3m5!1s0x33918e468c3dcb0d:0x32a8734baef8ee29!8m2!3d16.6079706!4d120.3157926!16s%2Fg%2F1hc53540h?entry=ttu" target="_blank"><i class="fa-solid fa-map-pin"></i> Sitemap - DOST - Region 1</a></li>
       </ul>
     </div>
   </div>

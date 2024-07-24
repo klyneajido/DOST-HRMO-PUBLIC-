@@ -1,9 +1,14 @@
 <?php
 include_once 'db_connection.php'; // Adjust the path as necessary
 
+// Function to validate and sanitize input
+function sanitizeInput($input) {
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+}
+
 // Get search and filter parameters
-$searchInput = isset($_GET['searchInput']) ? $_GET['searchInput'] : '';
-$locDepStat = isset($_GET['locDepStat']) ? $_GET['locDepStat'] : '';
+$searchInput = isset($_GET['searchInput']) ? sanitizeInput($_GET['searchInput']) : '';
+$locDepStat = isset($_GET['locDepStat']) ? sanitizeInput($_GET['locDepStat']) : '';
 
 // Get the current page number
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
@@ -24,9 +29,12 @@ if (!empty($locDepStat)) {
 }
 
 // Add pagination to the query
-$sql .= " LIMIT ? OFFSET ?";
+$sql .= " ORDER BY job.updated_at DESC LIMIT ? OFFSET ?";
 
 $stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die('Error preparing statement: ' . $conn->error);
+}
 
 // Bind parameters
 $bindParams = [];
@@ -46,7 +54,9 @@ array_push($bindParams, $jobsPerPage, $offset);
 
 $stmt->bind_param($bindParamsTypes, ...$bindParams);
 
-$stmt->execute();
+if (!$stmt->execute()) {
+    die('Error executing statement: ' . $stmt->error);
+}
 $stmt->bind_result($job_id, $job_title, $position_or_unit, $description, $place_of_assignment, $department_name, $salary, $status, $created_at, $updated_at, $deadline);
 
 $jobs = [];
@@ -86,10 +96,16 @@ if (!empty($locDepStat)) {
 }
 
 $totalJobsStmt = $conn->prepare($totalJobsSql);
+if ($totalJobsStmt === false) {
+    die('Error preparing statement: ' . $conn->error);
+}
+
 if (!empty($bindParams)) {
     $totalJobsStmt->bind_param($bindParamsTypes, ...$bindParams);
 }
-$totalJobsStmt->execute();
+if (!$totalJobsStmt->execute()) {
+    die('Error executing statement: ' . $totalJobsStmt->error);
+}
 $totalJobsStmt->bind_result($totalJobs);
 $totalJobsStmt->fetch();
 $totalJobsStmt->close();
@@ -104,42 +120,38 @@ if (count($jobs) > 0) {
         }
         ?>
 
-<div class="col-lg-6 col-md-12 pt-2 card-a">
-    <!-- Single Job -->
-    <a class="" href="job_description.php?job_id=<?php echo $job['job_id']; ?>">
-        <div class="single-job ">
-            <div class="job-content">
-                <div class="job-title row d-flex justify-content-between  ">
-                    <h4 class="col-lg-9 col-md-9 col-sm-9 "><?php echo htmlspecialchars($job['job_title']) ?>
-                        <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
-                    <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
-                        <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
+        <div class="col-lg-6 col-md-12 pt-2 card-a">
+            <!-- Single Job -->
+            <a class="" href="job_description.php?job_id=<?php echo htmlspecialchars($job['job_id']); ?>">
+                <div class="single-job ">
+                    <div class="job-content">
+                        <div class="job-title row d-flex justify-content-between">
+                            <h4 class="col-lg-9 col-md-9 col-sm-9"><?php echo htmlspecialchars($job['job_title']) ?>
+                                <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
+                            <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
+                                <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><?php echo htmlspecialchars($job['department_name']) ?></li>
+                            <li>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary'])) ?></li>
+                            <li><?php echo htmlspecialchars($job['place_of_assignment']) ?></li>
+                        </ul>
+                        <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
+                        <p class="text-secondary">• Due: <?php echo htmlspecialchars(formatDate($job['deadline'])) ?></p>
                     </div>
                 </div>
-
-                <ul>
-                    <li>
-                        <?php echo htmlspecialchars($job['department_name']) ?></li>
-                    <li>₱<?php echo htmlspecialchars(thousandsCurrencyFormat($job['salary'])) ?>
-                    </li>
-                    <li><?php echo htmlspecialchars($job['place_of_assignment']) ?>
-                    </li>
-                </ul>
-                <p class="text-secondary">Job Posted <?php echo htmlspecialchars(time_ago($job['created_at'])) ?></p>
-                <p class="text-secondary">• Due: <?php echo htmlspecialchars(formatDate($job['deadline'])) ?></p>
-            </div>
+            </a>
+            <!-- End Single Job -->
         </div>
-    </a>
-    <!-- End Single Job -->
-</div>
-<!--end col-->
-<?php
+        <!--end col-->
+        <?php
         $counter++;
     }
     echo '</div>';
 } else {
     ?>
-<div class="col-12 d-flex justify-content-center mt-4 pt-2">
+    <div class="col-12 d-flex justify-content-center mt-4 pt-2">
         <div class="card border-0 bg-light rounded shadow-sm">
             <div class="card-body p-4 text-center">
                 <h6>No Job Opportunities Available</h6>
@@ -147,7 +159,7 @@ if (count($jobs) > 0) {
             </div>
         </div>
     </div><!--end col-->
-<?php
+    <?php
 }
 ?>
 <?php
@@ -187,11 +199,22 @@ function time_ago($timestamp)
         } else {
             return $days . ' days ago';
         }
+    } elseif ($time_diff < 31536000) {
+        $months = round($time_diff / 2592000);
+        if ($months == 1) {
+            return '1 month ago';
+        } else {
+            return $months . ' months ago';
+        }
     } else {
-        return date('F j, Y', $timestamp);
+        $years = round($time_diff / 31536000);
+        if ($years == 1) {
+            return '1 year ago';
+        } else {
+            return $years . ' years ago';
+        }
     }
 }
-
 function thousandsCurrencyFormat($num)
 {
     if ($num > 1000) {

@@ -306,6 +306,24 @@ body {
 background-color: white;
 border-radius: 6px;
 }
+.custom-search-bar {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-search-bar:hover {
+  background-color: lightblue;
+  color: #fff;
+}
+
+.custom-search-bar:focus-within {
+  background-color: lightblue;
+  color: #fff;
+}
+
+.custom-search-bar input:focus {
+  outline: none;
+}
+
 .card-body{
     background-color: white;
     border-radius: 6px;

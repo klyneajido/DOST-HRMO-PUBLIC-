@@ -33,12 +33,20 @@
 
     <section id="title">
         <div class="container">
-            <h1 class="header"><?php echo htmlspecialchars($job_title) ?>
+            <p class="h1 header"><?php echo htmlspecialchars($job_title) ?>
                 <?php echo htmlspecialchars($position_or_unit) ?><br><small>of
-                    <?php echo htmlspecialchars($department_name) ?></small></h1>
+                    <?php echo htmlspecialchars($department_name) ?></small></p>
             <div class="header-description"><?php echo htmlspecialchars($place_of_assignment) ?>
                 | Posted on <?php echo htmlspecialchars(formatDate($deadline)) ?> |<span
-                    class="badge featured-badge badge-info"><?php echo htmlspecialchars($status) ?></span>
+                    class="badge featured-badge badge-info">
+                    <?php 
+                if ($status == 'Permanent') {
+                    echo 'Permanent:';
+                } elseif ($status == 'COS') {
+                    echo 'Contract  of Service';
+                }
+            ?>
+                </span>
             </div>
         </div>
     </section>
@@ -122,14 +130,24 @@
                                     <?php echo htmlspecialchars($status)?></div>
                                 <div class="mb-2"><strong>Job Location:</strong>
                                     <?php echo htmlspecialchars($place_of_assignment)?></div>
-                                <div class="mb-2"><strong>Salary:</strong>
+                                <div class="mb-2"><strong>
+                                        <?php 
+                if ($status == 'Permanent') {
+                    echo 'Monthly Salary:';
+                } elseif ($status == 'COS') {
+                    echo 'Daily Salary:';
+                } else {
+                    echo 'Salary:';
+                }
+            ?>
+                                    </strong>
                                     ₱<?php echo htmlspecialchars(number_format($salary,2))?></div>
                             </div>
                         </div>
-                        <!-- Sidebar (Job Overview) End -->
+
                     </div>
                 </div>
-                <!-- Job Sidebar Wrap End -->
+
 
             </div>
         </div>

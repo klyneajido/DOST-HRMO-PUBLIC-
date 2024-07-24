@@ -36,9 +36,10 @@ while ($stmt->fetch()) {
     <?php
 }
 if (!$rowsFetched) {?>
- <div class="slider-card">
-        <h5 class="p-2 text-center"><b>No Announcements Available</b></h5>
+ <div class="slider-card w-70">
+        <h5 class="p-2 text-center pt-4 mx-5"><b>No Announcements Available</b></h5>
         <p class="text-center p-3">Sorry, there are no announcements to display at this time.</p>
+        <br>
     </div>
     <?php
 }

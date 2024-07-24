@@ -56,7 +56,6 @@ body {
   letter-spacing: 0.1em;
   text-align: center;
   margin-bottom: 40px;
-
 }
 .header:after {
   content: " ";
@@ -66,10 +65,6 @@ body {
   height: 2px;
   background: rgb(0, 24, 97);
 }
-#title p{
-  color: #4460ae;
-}
-
 .header-description {
   color: #868e96;
   font-size: 0.9rem;

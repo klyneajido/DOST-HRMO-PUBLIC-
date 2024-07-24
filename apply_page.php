@@ -49,7 +49,7 @@
                     enctype="multipart/form-data" novalidate>
 
                     <div class="col-md-4">
-                        <label for="lastname" class="form-label">Lastname<span class="red-asterisk">*</span></label>
+                        <label for="lastname" class="form-label">Lastname <span class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="lastname" id="lastname" required>
 
                         <div class="valid-feedback">
@@ -202,7 +202,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="certificate_eligibility" class="form-label">Photocopy of certificate of
+                        <label for="certificate_eligibility" class="form-label">Certificate of
                             eligibility/rating/license <span class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="certificate_eligibility"
                             id="certificate_eligibility" accept="application/pdf" onchange="validateFileSize(this)"
@@ -213,7 +213,7 @@
 
 
                     <div class="col-md-6">
-                        <label for="transcript_records" class="form-label">Photocopy of Transcript of Records <span
+                        <label for="transcript_records" class="form-label">Transcript of Records <span
                                 class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="transcript_records" id="transcript_records"
                             accept="application/pdf" onchange="validateFileSize(this)" required>
@@ -222,7 +222,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="certificate_of_employment" class="form-label">Photocopy of Certificate of
+                        <label for="certificate_of_employment" class="form-label">Certificate of
                             Employment/s
                             <span class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="certificate_of_employment"

@@ -32,7 +32,7 @@
         <div class="container mt-5">
             <!-- Search Bar -->
             <div class="search-bar shadow-sm p-4 mb-4">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search for documents..." onkeyup="filterDocuments()">
+                <input type="text" id="searchInput" class="form-control custom-search-bar" placeholder="Search for documents..." onkeyup="filterDocuments()">
             </div>
 
             <div class="row" id="documentList">
