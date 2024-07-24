@@ -33,13 +33,21 @@
                 <h2 class="mb-4">Apply for <?php echo htmlspecialchars($job_title); ?>
                     <?php echo htmlspecialchars($position_or_unit); ?>
                 </h2>
+                <!-- Alert Messages -->
+                <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show"
+                    role="alert">
+                    <?php echo $_SESSION['message']; ?>
+                </div>
+                <?php unset($_SESSION['message']); ?>
+                <?php endif; ?>
                 <p><b>Please note:</b> Only PDF files are allowed, and the maximum file size for each upload is 5MB. You
                     can only have 3 attempts each day.</p>
                 <!-- FORM -->
                 <form method="post" id="form" autocomplete="off" class="row g-3 needs-validation"
                     action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?job_id=" . $job_id); ?>"
                     enctype="multipart/form-data" novalidate>
-                    
+
                     <div class="col-md-4">
                         <label for="lastname" class="form-label">Lastname<span class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="lastname" id="lastname" required>
@@ -47,6 +55,7 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
 
@@ -56,6 +65,7 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-4">
@@ -65,14 +75,15 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-4 ">
                         <label for="sex" class="form-label">Sex <span class="red-asterisk">*</span></label>
                         <select name="sex" id="sex" class="form-select" required>
-                        <option value="" disabled selected>Select</option>
-                            <option  id="male" value="male">Male</option>
-                            <option  id="female" value="female">Female</option>
+                            <option value="" disabled selected>Select</option>
+                            <option id="male" value="male">Male</option>
+                            <option id="female" value="female">Female</option>
                         </select>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                             Please select your Gender.
@@ -87,6 +98,7 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-4">
@@ -107,6 +119,7 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-4">
@@ -115,27 +128,30 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="contact" class="form-label">Years Of Experience<span
+                        <label for="contact" class="form-label">Years of Experience<span
                                 class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="years_of_experience" id="years_of_experience"
                             required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
 
                     <div class="col-md-4">
-                        <label for="contact" class="form-label">Hours Of Trainings <span
+                        <label for="contact" class="form-label">Hours of Trainings <span
                                 class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="hours_of_training" id="hours_of_training"
                             required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
 
@@ -145,82 +161,91 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
 
                     <div class="col-md-4">
-                        <label for="contact" class="form-label">List Of Awards <span
+                        <label for="contact" class="form-label">List of Awards <span
                                 class="red-asterisk">*</span></label>
                         <input type="text" class="form-control" name="list_of_awards" id="list_of_awards" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                        <div class="invalid-feedback">Required</div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="application_letter" class="form-label">Application Letter <span
                                 class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="application_letter" id="application_letter"
-                            accept="application/pdf" required>
-
-                        <div class="invalid-feedback">Invalid</div>
+                            accept="application/pdf" onchange="validateFileSize(this)" required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="pds" class="form-label">Completed Personal Data Sheet with recent passport-sized
                             photo<span class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="pds" id="pds" accept="application/pdf" required>
-                        <div class="invalid-feedback">Invalid</div>
+                        <input type="file" class="form-control" name="pds" id="pds" accept="application/pdf"
+                            onchange="validateFileSize(this)" required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="performance_training" class="form-label">Performance rating in the last rating period
+                        <label for="performance_rating" class="form-label">Performance rating in the last rating period
                             (if applicable)</label>
-                        <input type="file" class="form-control" name="performance_training" id="performance_raiting"
-                            accept="application/pdf">
-                        <div class="invalid-feedback">Invalid</div>
+                        <input type="file" class="form-control" name="performance_rating" id="performance_rating"
+                            accept="application/pdf" onchange="validateFileSize(this)">
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
-
 
                     <div class="col-md-6">
                         <label for="certificate_eligibility" class="form-label">Photocopy of certificate of
                             eligibility/rating/license <span class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="certificate_eligibility"
-                            id="certificate_eligibility" accept="application/pdf" required>
-                        <div class="invalid-feedback">Invalid</div>
+                            id="certificate_eligibility" accept="application/pdf" onchange="validateFileSize(this)"
+                            required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
-
 
 
                     <div class="col-md-6">
                         <label for="transcript_records" class="form-label">Photocopy of Transcript of Records <span
                                 class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="transcript_records" id="transcript_records"
-                            accept="application/pdf" required>
-                        <div class="invalid-feedback">Invalid</div>
+                            accept="application/pdf" onchange="validateFileSize(this)" required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
-
                     <div class="col-md-6">
-                        <label for="certificate_of_employment" class="form-label">Photocopy of Certificate of Employment/s
+                        <label for="certificate_of_employment" class="form-label">Photocopy of Certificate of
+                            Employment/s
                             <span class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="certificate_of_employment"
-                            id="certificate_of_employment" accept="application/pdf" required>
-                        <div class="invalid-feedback">Invalid</div>
+                            id="certificate_of_employment" accept="application/pdf" onchange="validateFileSize(this)"
+                            required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="trainings_seminars" class="form-label">Proof of trainings and seminars attended
                             <span class="red-asterisk">*</span></label>
                         <input type="file" class="form-control" name="trainings_seminars" id="trainings_seminars"
-                            accept="application/pdf" required>
-                        <div class="invalid-feedback">Invalid</div>
+                            accept="application/pdf" onchange="validateFileSize(this)" required>
+                        <div class="invalid-feedback">Required</div>
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="awards" class="form-label">Proof of awards received (if applicable)</label>
-                        <input type="file" class="form-control" name="awards" id="awards" accept="application/pdf">
-                        <div class="invalid-feedback">Invalid</div>
+                        <input type="file" class="form-control" name="awards" id="awards" accept="application/pdf"
+                            onchange="validateFileSize(this)">
+                        <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
 
                     <button type="submit" class="submit-button btn btn-primary">Submit Application</button>
@@ -232,8 +257,8 @@
             <!-- Empty column to create space -->
         </div>
         <div id="footer">
-        <?php include("footer.php") ?>
-    </div>
+            <?php include("footer.php") ?>
+        </div>
     </div>
     <script src="assets/js/apply-form.js"></script>
 </body>

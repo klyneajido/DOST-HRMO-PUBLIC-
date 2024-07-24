@@ -2,12 +2,25 @@
 session_start();
 include_once 'PHP_Connections/db_connection.php';
 
+function handlePostSizeLimit() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Check if the POST request size exceeds the limit
+        if ($_SERVER['CONTENT_LENGTH'] > ini_get('post_max_size')) {
+            $_SESSION['message'] = "The uploaded files exceed the maximum allowed size.";
+            $_SESSION['message_type'] = "danger";
+            header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+            exit();
+        }
+    }
+}
+
+handlePostSizeLimit();
+
 // Function to check if user has exceeded the daily application limit
 function hasExceededApplicationLimit() {
     $maxApplicationsPerDay = 3;
     $currentTime = time();
 
-    // Initialize session variable if not set
     if (!isset($_SESSION['applications'])) {
         $_SESSION['applications'] = [];
     }
@@ -28,20 +41,47 @@ function isPdf($file) {
     return $mime_type === 'application/pdf';
 }
 
-// Function to handle file uploads and get file content
-function getFileContent($file) {
-    if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
+// Mapping of field names for user-friendly error messages
+function getFieldName($key) {
+    $fieldNames = [
+        'application_letter' => 'Application Letter',
+        'pds' => 'Personal Data Sheet',
+        'performance_rating' => 'Performance Rating',
+        'certificate_eligibility' => 'Certificate of Eligibility',
+        'transcript_records' => 'Transcript of Records',
+        'certificate_of_employment' => 'Certificate of Employment',
+        'trainings_seminars' => 'Trainings and Seminars',
+        'awards' => 'Awards'
+    ];
+
+    return isset($fieldNames[$key]) ? $fieldNames[$key] : ucfirst(str_replace('_', ' ', $key));
+}
+
+// Function to handle file validation and upload
+function validateAndGetFileContent($file, $fieldName) {
+    $errors = [];
+    $maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        // Check if the file is a PDF
         if (!isPdf($file)) {
-            die("Only PDF files are allowed for " . $file['name']);
+            $errors[] = "Invalid type of file for '{$fieldName}': Only PDF files are allowed.";
         }
 
-        if ($file['size'] > 5 * 1024 * 1024) { // 5MB limit
-            die("File size exceeds the maximum limit of 5MB for " . $file['name']);
+        // Check if the file size exceeds 5MB
+        if ($file['size'] > $maxSize) {
+            $errors[] = "Exceeded file size of 5MB for '{$fieldName}': " . htmlspecialchars($file['name']);
         }
 
-        return file_get_contents($file['tmp_name']);
+        if (empty($errors)) {
+            return [file_get_contents($file['tmp_name']), []];
+        } else {
+            return [null, $errors];
+        }
+    } elseif ($file['error'] === UPLOAD_ERR_INI_SIZE || $file['error'] === UPLOAD_ERR_FORM_SIZE) {
+        return [null, ["File size exceeds the maximum allowed size for '{$fieldName}': " . htmlspecialchars($file['name'])]];
     } else {
-        return null; // Return null if file is not uploaded or there's an error
+        return [null, ["Error uploading file for '{$fieldName}': " . htmlspecialchars($file['name'])]];
     }
 }
 
@@ -58,21 +98,52 @@ if ($job_id > 0) {
         $stmt->execute();
         $stmt->bind_result($job_title, $position_or_unit);
         if (!$stmt->fetch()) {
-            die("Job not found.");
+            $_SESSION['message'] = "Job not found.";
+            $_SESSION['message_type'] = "danger";
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         }
         $stmt->close();
     } else {
-        die("Error preparing query");
+        $_SESSION['message'] = "Error preparing query.";
+        $_SESSION['message_type'] = "danger";
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
     }
 } else {
-    die("Invalid job ID");
+    $_SESSION['message'] = "Invalid job ID.";
+    $_SESSION['message_type'] = "danger";
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Check if form data is present
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if (hasExceededApplicationLimit()) {
-        die("You have exceeded the maximum limit of applications per day.");
+        $_SESSION['message'] = "You have exceeded the maximum limit of applications per day.";
+        $_SESSION['message_type'] = "danger";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        exit();
     }
 
+    // Validate required fields
+    $requiredFields = ['lastname', 'firstname', 'address', 'email', 'contact_number', 'course', 'years_of_experience', 'hours_of_training', 'eligibility'];
+    $missingFields = [];
+
+    foreach ($requiredFields as $field) {
+        if (empty($_POST[$field])) {
+            $missingFields[] = ucfirst(str_replace('_', ' ', $field));
+        }
+    }
+
+    if (!empty($missingFields)) {
+        $_SESSION['message'] = "Please fill in the following required fields: " . implode(', ', $missingFields) . ".";
+        $_SESSION['message_type'] = "danger";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        exit();
+    }
+
+    // Sanitize form data
     $lastname = htmlspecialchars($_POST['lastname']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $middlename = htmlspecialchars($_POST['middlename']);
@@ -87,48 +158,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
     $status = "Shortlisted";
 
-    // Get file contents, handle optional files
-    $application_letter = isset($_FILES['application_letter']) ? getFileContent($_FILES['application_letter']) : null;
-    $personal_data_sheet = isset($_FILES['pds']) ? getFileContent($_FILES['pds']) : null;
-    $performance_rating = isset($_FILES['performance_rating']) ? getFileContent($_FILES['performance_rating']) : null;
-    $eligibility_rating_license = isset($_FILES['certificate_eligibility']) ? getFileContent($_FILES['certificate_eligibility']) : null;
-    $transcript_of_records = isset($_FILES['transcript_records']) ? getFileContent($_FILES['transcript_records']) : null;
-    $certificate_of_employment = isset($_FILES['certificate_of_employment']) ? getFileContent($_FILES['certificate_of_employment']) : null;
-    $proof_of_trainings_seminars = isset($_FILES['trainings_seminars']) ? getFileContent($_FILES['trainings_seminars']) : null;
-    $proof_of_rewards = isset($_FILES['awards']) ? getFileContent($_FILES['awards']) : null;
+    // Handle file uploads and get file content
+    $files = [
+        'application_letter' => $_FILES['application_letter'],
+        'pds' => $_FILES['pds'],
+        'performance_rating' => $_FILES['performance_rating'],
+        'certificate_eligibility' => $_FILES['certificate_eligibility'],
+        'transcript_records' => $_FILES['transcript_records'],
+        'certificate_of_employment' => $_FILES['certificate_of_employment'],
+        'trainings_seminars' => $_FILES['trainings_seminars'],
+        'awards' => $_FILES['awards']
+    ];
+
+    $fileContents = [];
+    $errors = [];
+    foreach ($files as $key => $file) {
+        $fieldName = getFieldName($key);
+        list($content, $fileErrors) = validateAndGetFileContent($file, $fieldName);
+        if ($content === null) {
+            $errors = array_merge($errors, $fileErrors);
+        } else {
+            $fileContents[$key] = $content;
+        }
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['message'] = implode('<br>', $errors);
+        $_SESSION['message_type'] = "danger";
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        exit();
+    }
 
     // Prepare SQL statement using a prepared statement
     $sql = "INSERT INTO applicants (
         job_title, position_or_unit, lastname, firstname, middlename, sex, address, email, contact_number, course, years_of_experience, hours_of_training, eligibility, list_of_awards, status, 
         application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_trainings_seminars, proof_of_rewards, 
         job_id, application_date
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        // Bind parameters securely
         $stmt->bind_param(
-            "ssssssssssssssssssssssbi", // Adjusted to match the number of parameters and types
+            "sssssssssssssssssssssssi", // Adjusted to match the number of parameters and types
             $job_title, $position_or_unit, $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $course, $years_of_experience, $hours_of_training, $eligibility, $list_of_awards, $status,
-            $application_letter, $personal_data_sheet, $performance_rating, $eligibility_rating_license, $transcript_of_records, $certificate_of_employment, $proof_of_trainings_seminars, $proof_of_rewards, $job_id
+            $fileContents['application_letter'], $fileContents['pds'], $fileContents['performance_rating'], $fileContents['certificate_eligibility'], $fileContents['transcript_records'], $fileContents['certificate_of_employment'], $fileContents['trainings_seminars'], $fileContents['awards'], $job_id
         );
-    
 
-        // Execute the statement
         if ($stmt->execute()) {
-            // Log the application timestamp
             $_SESSION['applications'][] = time();
-            echo "Application submitted successfully.";
+            $_SESSION['message'] = "Application submitted successfully.";
+            $_SESSION['message_type'] = "success";
         } else {
-            echo "Error: " . $stmt->error;
+            $_SESSION['message'] = "Application submission failed.";
+            $_SESSION['message_type'] = "danger";
         }
 
         $stmt->close();
     } else {
-        echo "Error preparing statement: " . $conn->error;
+        $_SESSION['message'] = "Error preparing statement: " . $conn->error;
+        $_SESSION['message_type'] = "danger";
     }
-}
 
-$conn->close();
+    header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+    exit();
+}
 ?>
