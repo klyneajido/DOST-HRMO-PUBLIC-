@@ -140,10 +140,10 @@ if (count($jobs) > 0) {
 } else {
     ?>
 <div class="col-12 d-flex justify-content-center mt-4 pt-2">
-        <div class="card border-0 bg-light rounded shadow">
+        <div class="card border-0 bg-light rounded shadow-sm">
             <div class="card-body p-4 text-center">
                 <h6>No Job Opportunities Available</h6>
-                <p class="text-muted mb-0">Currently, there are no job postings. Please check back later for new opportunities.</p>
+                <p class="text-muted mb-0">There are no job postings available.</p>
             </div>
         </div>
     </div><!--end col-->

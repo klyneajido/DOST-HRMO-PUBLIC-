@@ -15,33 +15,39 @@ if ($stmt->fetch()) {
     // If there are rows, display them
     do {
 ?>
-        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-            <div class="card border-0 bg-light rounded shadow">
-                <div class="card-body p-4">
-                    <span class="status-badge badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
-                    <h6><?php echo htmlspecialchars($job_title); ?></h6>
-                    <div class="mt-3">
-                        <span class='text-muted d-block'><i class='fa fa-building' aria-hidden='true'></i> <a href='#' target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
-                        <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i> ₱<?php echo htmlspecialchars(number_format($salary)); ?></span>
-                    </div>
-                    <div class="mt-3">
-                        <a href="job_description.php?job_id=<?php echo $job_id; ?>" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
+<div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+    <div class="card border-0 bg-light rounded shadow">
+        <div class="card-body p-4">
+            <span
+                class="status-badge badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0"><?php echo strtoupper(htmlspecialchars($status)); ?></span>
+            <h6><?php echo htmlspecialchars($job_title); ?></h6>
+            <div class="mt-3">
+                <span class='text-muted d-block'><i class='fa fa-building' aria-hidden='true'></i> <a href='#'
+                        target='_blank' class='text-muted'><?php echo htmlspecialchars($department_name); ?></a></span>
+                <span class='text-muted d-block'><i class="fa-solid fa-money-bill"></i>
+                    ₱<?php echo htmlspecialchars(number_format($salary)); ?></span>
             </div>
-        </div><!--end col-->
+            <div class="mt-3">
+                <a href="job_description.php?job_id=<?php echo $job_id; ?>" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end col-->
 <?php
      } while ($stmt->fetch()); // Fetch next row
     } else {
     ?>
-            <div class="col-12 d-flex justify-content-center mt-4 pt-2">
-        <div class="card border-0 bg-light rounded shadow">
-            <div class="card-body p-4 text-center">
-                <h6>No Job Opportunities Available</h6>
-                <p class="text-muted mb-0">Currently, there are no job postings. Please check back later for new opportunities.</p>
-            </div>
+<div class="col-12 d-flex justify-content-center mt-4 pt-2">
+    <div class="card border-0 bg-light rounded shadow">
+        <div class="card-body p-4 text-center">
+            <h6>No Job Opportunities Available</h6>
+            <p class="text-muted mb-0">Currently, there are no job postings. Please check back later for new
+                opportunities.</p>
         </div>
-    </div><!--end col-->
-    <?php
+    </div>
+</div>
+<!--end col-->
+<?php
     }
 ?>

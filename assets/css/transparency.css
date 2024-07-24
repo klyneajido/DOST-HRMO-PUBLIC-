@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap");
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", Helvetica, Arial, sans-serif !important;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #212112;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 7%;
+  background-color: #ebf4f6;
+  overflow-x: hidden;
+  transition: all 200ms linear;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bg-primary,
+.btn-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.badge-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.custom-control-input:checked ~ .custom-control-label:before,
+#preloader #status .spinner > div,
+.social-icon li a:hover,
+.back-to-top:hover,
+.back-to-home a,
+::selection,
+#topnav .navbar-toggle.open span:hover,
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots.clickable .owl-dot:hover span,
+.watch-video a .play-icon-circle,
+.sidebar .widget .tagcloud > a:hover,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.tns-nav button.tns-nav-active,
+.form-check-input.form-check-input:checked {
+  background-color: rgb(0, 24, 97) ;
+}
+
+ .btn-primary,
+.btn-outline-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.bg-soft-primary .border,
+.alert-primary,
+.alert-outline-primary,
+.badge-outline-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.form-group .form-control:focus,
+.form-group .form-control.active,
+.custom-control-input:checked ~ .custom-control-label:before,
+.custom-control-input:focus ~ .custom-control-label::before,
+.form-control:focus,
+.social-icon li a:hover,
+#topnav .has-submenu.active.active .menu-arrow,
+#topnav.scroll .navigation-menu > li:hover > .menu-arrow,
+#topnav.scroll .navigation-menu > li.active > .menu-arrow,
+#topnav .navigation-menu > li:hover > .menu-arrow,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.form-check-input:focus,
+.form-check-input.form-check-input:checked,
+.container-filter li.active,
+.container-filter li:hover {
+  background-color: rgb(0, 24, 97);
+}
+.bg-primary,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.focus,
+.badge-primary,
+.nav-pills .nav-link.active,
+.pagination .active a,
+.custom-control-input:checked ~ .custom-control-label:before,
+#preloader #status .spinner > div,
+.social-icon li a:hover,
+.back-to-top:hover,
+.back-to-home a,
+::selection,
+#topnav .navbar-toggle.open span:hover,
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots.clickable .owl-dot:hover span,
+.watch-video a .play-icon-circle,
+.sidebar .widget .tagcloud > a:hover,
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.tns-nav button.tns-nav-active,
+.form-check-input.form-check-input:checked {
+  background-color: rgb(0, 24, 97 )!important;
+}
+.btn {
+  padding: 8px 20px;
+  outline: none;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  font-weight: 600;
+  border-radius: 5px;
+}
+ .btn-primary {
+  background-color: rgb(0, 24, 97) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 7px rgb(109 199 122 / 50%);
+}
+
+/* SCROLLBAR */
+#style-5::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+#style-5::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+#style-5::-webkit-scrollbar-thumb {
+  background-color: #0ae;
+
+  background-image: --webkit-gradient(
+    linear,
+    0 0,
+    0 100%,
+    color-stop(0.5, rgba(255, 255, 255, 0.2)),
+    color-stop(0.5, transparent),
+    to(transparent)
+  );
+}
+
+.site-footer {
+  background-color: rgb(0, 24, 97);
+  padding: 45px 0 20px;
+  font-size: 15px;
+  line-height: 24px;
+  color: #737373;
+}
+.site-footer hr {
+  border-top-color: #bbb;
+  opacity: 0.5;
+}
+.site-footer hr.small {
+  margin: 20px 0;
+}
+.site-footer h6 {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+.site-footer a {
+  color: #737373;
+}
+.site-footer a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+.footer-links {
+  padding-left: 0;
+  list-style: none;
+}
+.footer-links li {
+  display: block;
+}
+.footer-links a {
+  color: #737373;
+}
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+.footer-links.inline li {
+  display: inline-block;
+}
+.site-footer .social-icons {
+  text-align: right;
+}
+.site-footer .social-icons a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 6px;
+  margin-right: 0;
+  border-radius: 100%;
+  background-color: #33353d;
+}
+.copyright-text {
+  margin: 0;
+}
+@media (max-width: 991px) {
+  .site-footer [class^="col-"] {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 0;
+  }
+  .site-footer .copyright-text,
+  .site-footer .social-icons {
+    text-align: center;
+  }
+}
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.social-icons li {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.social-icons li.title {
+  margin-right: 15px;
+  text-transform: uppercase;
+  color: #96a2b2;
+  font-weight: 700;
+  font-size: 13px;
+}
+.social-icons a {
+  background-color: #eceeef;
+  color: #818a91;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+  color: #fff;
+  background-color: #29aafe;
+}
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px;
+}
+.social-icons a.facebook:hover {
+  background-color: #3b5998;
+}
+.social-icons a.twitter:hover {
+  background-color: #00aced;
+}
+.social-icons a.linkedin:hover {
+  background-color: #007bb6;
+}
+.social-icons a.dribbble:hover {
+  background-color: rgb(0, 24, 97)!important;
+}
+@media (max-width: 767px) {
+  .social-icons li.title {
+    display: block;
+    margin-right: 0;
+    font-weight: 600;
+  }
+}
+
+.status-badge {
+  background-color: rgb(0, 24, 97) !important;
+}
+
+.transparency-container {
+    height: 100vh;
+    padding-top: 90px;
+    background-color: #f6f9fc;
+} 
+.search-bar{
+background-color: white;
+border-radius: 6px;
+}
+.card-body{
+    background-color: white;
+    border-radius: 6px;
+}
+
+        .document-item {
+            margin-bottom: 30px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .no-documents {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }

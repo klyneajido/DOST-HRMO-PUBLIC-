@@ -178,7 +178,7 @@
                     <div class="col-md-6">
                         <label for="application_letter" class="form-label">Application Letter <span
                                 class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="application_letter" id="application_letter"
+                        <input type="file" class="form-control" name="application_letter" id="application_letter" accept=".pdf"
                             accept="application/pdf" onchange="validateFileSize(this)" required>
                         <div class="invalid-feedback">Required</div>
                         <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>

@@ -5,20 +5,35 @@ include_once 'PHP_Connections/db_connection.php';
 function handlePostSizeLimit() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if the POST request size exceeds the limit
-        if ($_SERVER['CONTENT_LENGTH'] > ini_get('post_max_size')) {
+        $postMaxSize = ini_get('post_max_size');
+        $postMaxSizeBytes = convertToBytes($postMaxSize);
+
+        if ($_SERVER['CONTENT_LENGTH'] > $postMaxSizeBytes) {
             $_SESSION['message'] = "The uploaded files exceed the maximum allowed size.";
             $_SESSION['message_type'] = "danger";
-            header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+            header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
             exit();
         }
     }
+}
+
+function convertToBytes($sizeStr) {
+    $sizeStr = trim($sizeStr);
+    $last = strtolower($sizeStr[strlen($sizeStr) - 1]);
+    switch ($last) {
+        case 'g': $size = (int)$sizeStr * 1024 * 1024 * 1024; break;
+        case 'm': $size = (int)$sizeStr * 1024 * 1024; break;
+        case 'k': $size = (int)$sizeStr * 1024; break;
+        default: $size = (int)$sizeStr; break;
+    }
+    return $size;
 }
 
 handlePostSizeLimit();
 
 // Function to check if user has exceeded the daily application limit
 function hasExceededApplicationLimit() {
-    $maxApplicationsPerDay = 3;
+    $maxApplicationsPerDay = 20; // adjust bukas
     $currentTime = time();
 
     if (!isset($_SESSION['applications'])) {
@@ -122,27 +137,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if (hasExceededApplicationLimit()) {
         $_SESSION['message'] = "You have exceeded the maximum limit of applications per day.";
         $_SESSION['message_type'] = "danger";
-        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
         exit();
     }
 
-    // Validate required fields
     $requiredFields = ['lastname', 'firstname', 'address', 'email', 'contact_number', 'course', 'years_of_experience', 'hours_of_training', 'eligibility'];
     $missingFields = [];
 
     foreach ($requiredFields as $field) {
-        if (empty($_POST[$field])) {
+        // Use isset() to check if the field is set and handle empty or zero values explicitly
+        if (!isset($_POST[$field]) || trim($_POST[$field]) === '') {
             $missingFields[] = ucfirst(str_replace('_', ' ', $field));
         }
     }
-
     if (!empty($missingFields)) {
         $_SESSION['message'] = "Please fill in the following required fields: " . implode(', ', $missingFields) . ".";
         $_SESSION['message_type'] = "danger";
-        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
         exit();
     }
-
     // Sanitize form data
     $lastname = htmlspecialchars($_POST['lastname']);
     $firstname = htmlspecialchars($_POST['firstname']);
@@ -152,8 +165,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $contact_number = htmlspecialchars($_POST['contact_number']);
     $course = htmlspecialchars($_POST['course']);
-    $years_of_experience = htmlspecialchars($_POST['years_of_experience']);
-    $hours_of_training = htmlspecialchars($_POST['hours_of_training']);
+    $years_of_experience = isset($_POST['years_of_experience']) ? htmlspecialchars($_POST['years_of_experience']) : '0';
+    $hours_of_training = isset($_POST['hours_of_training']) ? htmlspecialchars($_POST['hours_of_training']) : '0';
     $eligibility = htmlspecialchars($_POST['eligibility']);
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
     $status = "Shortlisted";
@@ -185,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if (!empty($errors)) {
         $_SESSION['message'] = implode('<br>', $errors);
         $_SESSION['message_type'] = "danger";
-        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
         exit();
     }
 
@@ -220,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         $_SESSION['message_type'] = "danger";
     }
 
-    header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . $_GET['job_id']);
+    header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
     exit();
 }
 ?>
