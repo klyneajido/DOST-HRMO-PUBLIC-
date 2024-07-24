@@ -17,9 +17,9 @@
     <div class="col-md-3 col-sm-12">
       <h6>Contact us</h6>
       <ul class="footer-links">
-        <li><i class="fa-solid fa-phone"></i> (072) 888 3399 | 0917-840-8695</li>
-        <li><i class="fa-solid fa-envelope"></i> mail@region1.dost.gov.ph | hr@region1.dost.gov.ph</li>
-        <li><a href="https://www.google.com/maps/place/Department+of+Science+and+Technology+-+Region+1+Ilocos-Pangasinan+Region/@16.6080417,120.3140603,17.75z/data=!4m6!3m5!1s0x33918e468c3dcb0d:0x32a8734baef8ee29!8m2!3d16.6079706!4d120.3157926!16s%2Fg%2F1hc53540h?entry=ttu" target="_blank"><i class="fa-solid fa-map-pin"></i> Sitemap</a></li>
+        <li class="mb-2"><i class="fa-solid fa-phone"></i> (072) 888 3399 | 0917-840-8695</li>
+        <li class="mb-2"><i class="fa-solid fa-envelope"></i> mail@region1.dost.gov.ph | hr@region1.dost.gov.ph</li>
+        <li class="mb-2"><a href="https://www.google.com/maps/place/Department+of+Science+and+Technology+-+Region+1+Ilocos-Pangasinan+Region/@16.6080417,120.3140603,17.75z/data=!4m6!3m5!1s0x33918e468c3dcb0d:0x32a8734baef8ee29!8m2!3d16.6079706!4d120.3157926!16s%2Fg%2F1hc53540h?entry=ttu" target="_blank"><i class="fa-solid fa-map-pin"></i> Sitemap</a></li>
       </ul>
     </div>
   </div>
@@ -28,16 +28,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">Copyright &copy; 2024 All Rights Reserved by
-            <a href="#"> DOST Region 1 - IT Services and Management Unit 2024</a>.
+          <p class="copyright-text">©  DOST Region 1 - 
+            <a href="#">IT Services and Management Unit 2024</a>.
           </p>
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
           <ul class="social-icons">
             <li><a class="facebook" href="https://www.facebook.com/dost1hrmo" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="https://www.instagram.com/dostregion1/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-            <li><a class="linkedin" href="https://www.youtube.com/@dostro1" target="_blank"><i class="fa fa-youtube"></i></a></li>
+            <li><a class="instagram" href="https://www.instagram.com/dostregion1/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            <li><a class="youtube" href="https://www.youtube.com/@dostro1" target="_blank"><i class="fa fa-youtube"></i></a></li>
           </ul>
         </div>
       </div>

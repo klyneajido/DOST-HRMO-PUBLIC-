@@ -1,5 +1,4 @@
 <?php include("php_connections/fetch_documents.php") ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +43,7 @@
                                 <div class="card-body">
                                     <h6><?php echo htmlspecialchars($document['name']); ?></h6>
                                     <div class="mt-3">
-                                        <a href="download_document.php?id=<?php echo $document['doc_id']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Download</a>
+                                        <a href="php_connections/download_document.php?id=<?php echo $document['doc_id']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Download</a>
                                     </div>
                                 </div>
                             </div>

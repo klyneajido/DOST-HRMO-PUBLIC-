@@ -451,15 +451,13 @@ color: white;
 .social-icons a.facebook:hover {
   background-color: #3b5998;
 }
-.social-icons a.twitter:hover {
-  background-color: #00aced;
+.social-icons a.instagram:hover {
+  background-color: rgb(241, 71, 99);
 }
-.social-icons a.linkedin:hover {
-  background-color: #007bb6;
+.social-icons a.youtube:hover {
+  background-color: rgb(255, 39, 39);
 }
-.social-icons a.dribbble:hover {
-  background-color: rgb(0, 24, 97)!important;
-}
+
 @media (max-width: 767px) {
   .social-icons li.title {
     display: block;
