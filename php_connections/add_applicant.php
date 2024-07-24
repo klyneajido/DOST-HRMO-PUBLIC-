@@ -4,7 +4,6 @@ include_once 'PHP_Connections/db_connection.php';
 
 function handlePostSizeLimit() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Check if the POST request size exceeds the limit
         $postMaxSize = ini_get('post_max_size');
         $postMaxSizeBytes = convertToBytes($postMaxSize);
 
@@ -21,19 +20,17 @@ function convertToBytes($sizeStr) {
     $sizeStr = trim($sizeStr);
     $last = strtolower($sizeStr[strlen($sizeStr) - 1]);
     switch ($last) {
-        case 'g': $size = (int)$sizeStr * 1024 * 1024 * 1024; break;
-        case 'm': $size = (int)$sizeStr * 1024 * 1024; break;
-        case 'k': $size = (int)$sizeStr * 1024; break;
-        default: $size = (int)$sizeStr; break;
+        case 'g': return (int)$sizeStr * 1024 * 1024 * 1024;
+        case 'm': return (int)$sizeStr * 1024 * 1024;
+        case 'k': return (int)$sizeStr * 1024;
+        default: return (int)$sizeStr;
     }
-    return $size;
 }
 
 handlePostSizeLimit();
 
-// Function to check if user has exceeded the daily application limit
 function hasExceededApplicationLimit() {
-    $maxApplicationsPerDay = 20; // adjust bukas
+    $maxApplicationsPerDay = 20;
     $currentTime = time();
 
     if (!isset($_SESSION['applications'])) {
@@ -47,7 +44,6 @@ function hasExceededApplicationLimit() {
     return count($_SESSION['applications']) >= $maxApplicationsPerDay;
 }
 
-// Function to check if a file is a PDF
 function isPdf($file) {
     $finfo = finfo_open(FILEINFO_MIME_TYPE); 
     $mime_type = finfo_file($finfo, $file['tmp_name']);
@@ -56,7 +52,6 @@ function isPdf($file) {
     return $mime_type === 'application/pdf';
 }
 
-// Mapping of field names for user-friendly error messages
 function getFieldName($key) {
     $fieldNames = [
         'application_letter' => 'Application Letter',
@@ -71,21 +66,22 @@ function getFieldName($key) {
 
     return isset($fieldNames[$key]) ? $fieldNames[$key] : ucfirst(str_replace('_', ' ', $key));
 }
+function validateAndGetFileContent($file, $fieldName, $isOptional = false) {
+    static $pdfErrorDisplayed = false; // Track if PDF error has been shown
 
-// Function to handle file validation and upload
-function validateAndGetFileContent($file, $fieldName) {
     $errors = [];
     $maxSize = 5 * 1024 * 1024; // 5MB in bytes
 
     if ($file['error'] === UPLOAD_ERR_OK) {
-        // Check if the file is a PDF
         if (!isPdf($file)) {
-            $errors[] = "Invalid type of file for '{$fieldName}': Only PDF files are allowed.";
+            if (!$pdfErrorDisplayed) {
+                $errors[] = "You can only upload PDF files.";
+                $pdfErrorDisplayed = true; // Mark PDF error as shown
+            }
         }
 
-        // Check if the file size exceeds 5MB
         if ($file['size'] > $maxSize) {
-            $errors[] = "Exceeded file size of 5MB for '{$fieldName}': " . htmlspecialchars($file['name']);
+            $errors[] = "File must be 5MB or smaller.";
         }
 
         if (empty($errors)) {
@@ -94,13 +90,15 @@ function validateAndGetFileContent($file, $fieldName) {
             return [null, $errors];
         }
     } elseif ($file['error'] === UPLOAD_ERR_INI_SIZE || $file['error'] === UPLOAD_ERR_FORM_SIZE) {
-        return [null, ["File size exceeds the maximum allowed size for '{$fieldName}': " . htmlspecialchars($file['name'])]];
+        return [null, ["File size exceeds the maximum allowed size."]];
+    } elseif ($file['error'] === UPLOAD_ERR_NO_FILE && $isOptional) {
+        return [null, []];
     } else {
-        return [null, ["Error uploading file for '{$fieldName}': " . htmlspecialchars($file['name'])]];
+        return [null, ["An error occurred while uploading the file."]];
     }
 }
 
-// Get the job ID from the URL and validate it
+
 $job_id = isset($_GET['job_id']) ? intval($_GET['job_id']) : 17;
 $job_title = '';
 $position_or_unit = '';
@@ -132,7 +130,6 @@ if ($job_id > 0) {
     exit();
 }
 
-// Check if form data is present
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if (hasExceededApplicationLimit()) {
         $_SESSION['message'] = "You have exceeded the maximum limit of applications per day.";
@@ -145,7 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $missingFields = [];
 
     foreach ($requiredFields as $field) {
-        // Use isset() to check if the field is set and handle empty or zero values explicitly
         if (!isset($_POST[$field]) || trim($_POST[$field]) === '') {
             $missingFields[] = ucfirst(str_replace('_', ' ', $field));
         }
@@ -156,11 +152,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         header("Location: " . $_SERVER['PHP_SELF'] . "?job_id=" . htmlspecialchars($_GET['job_id']));
         exit();
     }
-    // Sanitize form data
+
     $lastname = htmlspecialchars($_POST['lastname']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $middlename = htmlspecialchars($_POST['middlename']);
-    $sex = isset($_POST['sex']) ? htmlspecialchars($_POST['sex']) : ''; // Handle optional field
+    $sex = isset($_POST['sex']) ? htmlspecialchars($_POST['sex']) : ''; 
     $address = htmlspecialchars($_POST['address']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $contact_number = htmlspecialchars($_POST['contact_number']);
@@ -171,7 +167,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $list_of_awards = htmlspecialchars($_POST['list_of_awards']);
     $status = "Shortlisted";
 
-    // Handle file uploads and get file content
     $files = [
         'application_letter' => $_FILES['application_letter'],
         'pds' => $_FILES['pds'],
@@ -186,8 +181,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $fileContents = [];
     $errors = [];
     foreach ($files as $key => $file) {
+        $isOptional = ($key === 'performance_rating' || $key === 'awards');
         $fieldName = getFieldName($key);
-        list($content, $fileErrors) = validateAndGetFileContent($file, $fieldName);
+        list($content, $fileErrors) = validateAndGetFileContent($file, $fieldName, $isOptional);
         if ($content === null) {
             $errors = array_merge($errors, $fileErrors);
         } else {
@@ -202,7 +198,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         exit();
     }
 
-    // Prepare SQL statement using a prepared statement
     $sql = "INSERT INTO applicants (
         job_title, position_or_unit, lastname, firstname, middlename, sex, address, email, contact_number, course, years_of_experience, hours_of_training, eligibility, list_of_awards, status, 
         application_letter, personal_data_sheet, performance_rating, eligibility_rating_license, transcript_of_records, certificate_of_employment, proof_of_trainings_seminars, proof_of_rewards, 
@@ -212,10 +207,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
+        $application_letter = $fileContents['application_letter'] ?? null;
+        $pds = $fileContents['pds'] ?? null;
+        $performance_rating = $fileContents['performance_rating'] ?? null;
+        $certificate_eligibility = $fileContents['certificate_eligibility'] ?? null;
+        $transcript_records = $fileContents['transcript_records'] ?? null;
+        $certificate_of_employment = $fileContents['certificate_of_employment'] ?? null;
+        $trainings_seminars = $fileContents['trainings_seminars'] ?? null;
+        $awards = $fileContents['awards'] ?? null;
+
         $stmt->bind_param(
-            "sssssssssssssssssssssssi", // Adjusted to match the number of parameters and types
+            "sssssssssssssssssssssssi",
             $job_title, $position_or_unit, $lastname, $firstname, $middlename, $sex, $address, $email, $contact_number, $course, $years_of_experience, $hours_of_training, $eligibility, $list_of_awards, $status,
-            $fileContents['application_letter'], $fileContents['pds'], $fileContents['performance_rating'], $fileContents['certificate_eligibility'], $fileContents['transcript_records'], $fileContents['certificate_of_employment'], $fileContents['trainings_seminars'], $fileContents['awards'], $job_id
+            $application_letter,
+            $pds,
+            $performance_rating,
+            $certificate_eligibility,
+            $transcript_records,
+            $certificate_of_employment,
+            $trainings_seminars,
+            $awards,
+            $job_id
         );
 
         if ($stmt->execute()) {
@@ -229,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
         $stmt->close();
     } else {
-        $_SESSION['message'] = "Error preparing statement: " . $conn->error;
+        $_SESSION['message'] = "Error preparing statement.";
         $_SESSION['message_type'] = "danger";
     }
 
