@@ -14,14 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/0dcd39d035.js" crossorigin="anonymous"></script>
-    <style>
-        .document-item {
-            margin-bottom: 30px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-    </style>
+
 </head>
 
 <body class="scrollbar" id="style-5">
@@ -29,7 +22,12 @@
         <!-- Navbar -->
         <?php include("navbar.php"); ?>
         <!-- End of Navbar -->
-        <div class="container mt-5">
+
+        <div class="container mt-3">
+        <div>
+                    <h4 class="alert-heading">Document Templates</h4>
+                    <p>Access the essential document templates needed for your job application. Our Transparency page provides a comprehensive collection of forms and templates to assist you throughout the application process.</p>
+                </div>
             <!-- Search Bar -->
             <div class="search-bar shadow-sm p-4 mb-4">
                 <input type="text" id="searchInput" class="form-control custom-search-bar" placeholder="Search for documents..." onkeyup="filterDocuments()">
@@ -65,11 +63,11 @@
                 <p class="text-muted mb-0">Try adjusting your search criteria.</p>
             </div>
         </div><!-- end container -->
-
-        <script src="assets/js/transparency.js"></script>
-    </div>
-        <!-- Site footer -->
         <div id="footer"><?php include("footer.php")?></div>
+    </div>
+    <script src="assets/js/transparency.js"></script>
+        <!-- Site footer -->
+
 </body>
 
 </html>
