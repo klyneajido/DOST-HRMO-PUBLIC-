@@ -129,7 +129,7 @@ if (count($jobs) > 0) {
                             <h4 class="col-lg-9 col-md-9 col-sm-9"><?php echo htmlspecialchars($job['job_title']) ?>
                                 <?php echo htmlspecialchars($job['position_or_unit']) ?></h4>
                             <div class="col-lg-3 col-md-3 col-sm-3 position-relative">
-                                <span class="status-span"><?php echo htmlspecialchars($job['status']) ?></span>
+                                <span class="status-span font-weight-bold"><?php echo htmlspecialchars($job['status']) ?></span>
                             </div>
                         </div>
                         <ul>

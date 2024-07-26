@@ -37,7 +37,7 @@
                 <?php echo htmlspecialchars($position_or_unit) ?><br><small>of
                     <?php echo htmlspecialchars($department_name) ?></small></p>
             <div class="header-description"><?php echo htmlspecialchars($place_of_assignment) ?>
-                | Posted on <?php echo htmlspecialchars(formatDate($deadline)) ?> |<span
+                | Posted on <?php echo htmlspecialchars(formatDate($created_at)) ?> |<span
                     class="badge featured-badge badge-info">
                     <?php 
                 if ($status == 'Permanent') {
@@ -108,7 +108,7 @@
                                     <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2 ">
                                         <?php if ($deadlinePassed): ?>
                                         <!-- Deadline has passed, button is disabled -->
-                                        <button class="btn btn-secondary" disabled>Apply</button>
+                                        <button class="btn btn-secondary text-center"disabled>Expired</button>
                                         <?php else: ?>
                                         <!-- Deadline has not passed, button is enabled -->
                                         <a href="apply_page.php?job_id=<?php echo $job_id; ?>"
@@ -124,11 +124,13 @@
                         <div class="sidebar-body">
                             <div class="content">
                                 <h6 class="overview-title mb-4"><strong>Job Overview</strong></h6>
+                                <div class="mb-2"><strong>Posted on:</strong>
+                                <?php echo htmlspecialchars(formatDate($created_at))?></div>
                                 <div class="mb-2"><strong>Deadline:</strong>
                                     <?php echo htmlspecialchars(formatDate($deadline))?>, 5:00 PM</div>
                                 <div class="mb-2"><strong>Employment Status:</strong>
                                     <?php echo htmlspecialchars($status)?></div>
-                                <div class="mb-2"><strong>Job Location:</strong>
+                                <div class="mb-2"><strong>Held at:</strong>
                                     <?php echo htmlspecialchars($place_of_assignment)?></div>
                                 <div class="mb-2"><strong>
                                         <?php 
@@ -165,10 +167,15 @@
     <div id="footer">
         <?php include("footer.php") ?>
     </div>
-    <script src="assets/js/script_joblist_page.js"></script>
+<script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="assets/js/job-description.js"></script>
 </body>
 
 </html>
