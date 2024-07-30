@@ -179,8 +179,8 @@
                     <div class="col-md-6">
                         <label for="application_letter" class="form-label">Application Letter <span
                                 class="red-asterisk">*</span></label>
-                        <input type="file" class="form-control" name="application_letter" id="application_letter" accept=".pdf"
-                            accept="application/pdf" onchange="validateFileSize(this)" required>
+                        <input type="file" class="form-control" name="application_letter" id="application_letter"
+                            accept=".pdf" accept="application/pdf" onchange="validateFileSize(this)" required>
                         <div class="invalid-feedback">Required</div>
                         <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
@@ -248,7 +248,17 @@
                             onchange="validateFileSize(this)">
                         <div class="invalid-feedback invalid-size">Invalid File Size! Must not exceed to 5MB</div>
                     </div>
-
+                    <div class="col-md-12 mt-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                            By agreeing to the terms and conditions, you confirm that all the information entered and uploaded is accurate and compliant.
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="submit-button btn btn-primary">Submit Application</button>
                 </form>
             </div>
@@ -263,9 +273,9 @@
     </div>
     <script src="assets/js/apply-form.js"></script>
     <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

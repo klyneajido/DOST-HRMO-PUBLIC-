@@ -30,7 +30,7 @@ function convertToBytes($sizeStr) {
 handlePostSizeLimit();
 
 function hasExceededApplicationLimit() {
-    $maxApplicationsPerDay = 20;
+    $maxApplicationsPerDay = 3;
     $currentTime = time();
 
     if (!isset($_SESSION['applications'])) {

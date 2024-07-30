@@ -41,9 +41,9 @@
                     class="badge featured-badge badge-info">
                     <?php 
                 if ($status == 'Permanent') {
-                    echo 'Permanent:';
+                    echo 'Permanent';
                 } elseif ($status == 'COS') {
-                    echo 'Contract  of Service';
+                    echo 'Contract of Service';
                 }
             ?>
                 </span>
@@ -108,7 +108,7 @@
                                     <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2 ">
                                         <?php if ($deadlinePassed): ?>
                                         <!-- Deadline has passed, button is disabled -->
-                                        <button class="btn btn-secondary text-center"disabled>Expired</button>
+                                        <button class="btn btn-secondary text-center" disabled>Expired</button>
                                         <?php else: ?>
                                         <!-- Deadline has not passed, button is enabled -->
                                         <a href="apply_page.php?job_id=<?php echo $job_id; ?>"
@@ -125,12 +125,12 @@
                             <div class="content">
                                 <h6 class="overview-title mb-4"><strong>Job Overview</strong></h6>
                                 <div class="mb-2"><strong>Posted on:</strong>
-                                <?php echo htmlspecialchars(formatDate($created_at))?></div>
+                                    <?php echo htmlspecialchars(formatDate($created_at))?></div>
                                 <div class="mb-2"><strong>Deadline:</strong>
                                     <?php echo htmlspecialchars(formatDate($deadline))?>, 5:00 PM</div>
                                 <div class="mb-2"><strong>Employment Status:</strong>
                                     <?php echo htmlspecialchars($status)?></div>
-                                <div class="mb-2"><strong>Held at:</strong>
+                                <div class="mb-2"><strong>Place of Assignment:</strong>
                                     <?php echo htmlspecialchars($place_of_assignment)?></div>
                                 <div class="mb-2"><strong>
                                         <?php 
@@ -167,11 +167,11 @@
     <div id="footer">
         <?php include("footer.php") ?>
     </div>
-<script>
-    $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
+    <script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
