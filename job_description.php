@@ -71,14 +71,25 @@
                                     <li>No educational requirements listed.</li>
                                     <?php endif; ?>
                                 </ul>
-                                <strong>Experience and Training</strong>
+                                <strong>Experience</strong>
                                 <ul>
                                     <?php if (!empty($requirements['experience'])): ?>
                                     <?php foreach ($requirements['experience'] as $requirement): ?>
                                     <li><?php echo htmlspecialchars($requirement); ?></li>
                                     <?php endforeach; ?>
                                     <?php else: ?>
-                                    <li>No experience or training requirements listed.</li>
+                                    <li>No experience requirements listed.</li>
+                                    <?php endif; ?>
+                                </ul>
+
+                                <strong>Training</strong>
+                                <ul>
+                                    <?php if (!empty($requirements['training'])): ?>
+                                    <?php foreach ($requirements['training'] as $requirement): ?>
+                                    <li><?php echo htmlspecialchars($requirement); ?></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <li>No training requirements listed.</li>
                                     <?php endif; ?>
                                 </ul>
 
@@ -91,6 +102,17 @@
                                 <?php endforeach; ?>
                                 <?php else: ?>
                                 <li>No duties and responsibilities listed.</li>
+                                <?php endif; ?>
+                            </ul>
+
+                            <h6 class="mb-3 mt-4"><strong>Preferred Competencies</strong></h6>
+                            <ul>
+                                <?php if (!empty($requirements['competencies'])): ?>
+                                <?php foreach ($requirements['competencies'] as $requirement): ?>
+                                <li><?php echo htmlspecialchars($requirement); ?></li>
+                                <?php endforeach; ?>
+                                <?php else: ?>
+                                <li>No preferred competencies listed.</li>
                                 <?php endif; ?>
                             </ul>
                         </div>
