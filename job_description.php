@@ -93,6 +93,18 @@
                                     <?php endif; ?>
                                 </ul>
 
+                                <strong>Eligibility</strong>
+                                <ul>
+                                    <?php if (!empty($requirements['eligibility'])): ?>
+                                    <?php foreach ($requirements['eligibility'] as $requirement): ?>
+                                    <li><?php echo htmlspecialchars($requirement); ?></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <li>No eligibility requirements listed.</li>
+                                    <?php endif; ?>
+                                </ul>
+
+
                             </ul>
                             <h6 class="mb-3 mt-4"><strong>Responsibilities</strong></h6>
                             <ul>
